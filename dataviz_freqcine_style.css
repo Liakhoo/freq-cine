@@ -1,1 +1,12 @@
-CSS file
+p, ul, ol, h1, table{
+  max-width: none;
+  text-align:justify;
+  color: red;
+}
+body{
+  background: grey
+}
+
+#scatter {
+  width: 100%;
+}
