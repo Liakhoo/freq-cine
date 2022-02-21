@@ -4,16 +4,23 @@ body{
   bottom: 0;
   top: 0;
   right: 0;
+  background: linear-gradient(to bottom, #5b5b5b 0 20%, white 30% 100%)
 }
 
-#header{
-  background:grey;}
+.header {
+  padding: 5px;
+  text-align: center;
+  background: #5b5b5b;
+  margin: 0;
+}
 
-#container{
-  background: white}
+.container{
+  font-family: Arial, sans-serif;
+}
 
 h1{
   font-family: Helvetica, sans-serif;
   color: white;
   font-weight: bold;
-  font-style: italic}  
+  font-style: italic
+}  
