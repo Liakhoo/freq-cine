@@ -1,12 +1,19 @@
-p, ul, ol, h1, table{
-  max-width: none;
-  text-align:justify;
-  color: red;
-}
 body{
-  background: grey
+  margin: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
 }
 
-#scatter {
-  width: 100%;
-}
+#header{
+  background:grey;}
+
+#container{
+  background: white}
+
+h1{
+  font-family: Helvetica, sans-serif;
+  color: white;
+  font-weight: bold;
+  font-style: italic}  
