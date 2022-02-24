@@ -665,4 +665,4 @@ d3.select("#stop").on("click", function(myTimer) {
 //importation des sélecteurs
 viewof variable = html`<select id="DateSelect">
     ${["Nombre d'entrées","Nombre d'établissements","Nombre d'écrans","Nombre de fauteuils","Nombre de séances","Recette","Recette moyenne par entrée","Taux moyen d'occupation des fauteuils"].map(d => html`<option>${d}</option>`)}
-</select>`
+</select>`;
