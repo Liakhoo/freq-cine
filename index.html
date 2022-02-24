@@ -10,6 +10,49 @@
     <h1>Fréquentation et recettes des cinémas en France</h1>
   </div>
   <div class="container">
-    <p>Endroit où sera positionner les graphes</p>
+    <script src="main_script"></script>
+    <p>Taille des cinémas : </p>
+    <input type="checkbox" id="petit" name="petit" checked>
+    <label for="petit">Petit</label>
+    <input type="checkbox" id="moyen" name="moyen" checked>
+    <label for="moyen">Moyen</label>
+    <input type="checkbox" id="grand" name="grand" checked>
+    <label for="grand">Grand</label>
+    
+    <div id="slider">
+		<input type='range' min='${d3.min(rawYear)}' max='${d3.max(rawYear)}' step='1' value='${d3.min(rawYear)}' id='rangeSlider' /> 
+	  <button type="button" id="start">Lancer la lecture automatique</button>
+    <button type="button" id="reset">Déselectionner toutes les régions</button>
+    <table width="100%">
+     <colgroup>
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+     </colgroup>
+     <tr>
+      <td colspan="17">
+        <div id="scatter">${scatterplot(filteredData, getKey(variable))}</div>
+      </td>
+      <td colspan="20">
+        <div id="legend">${legend_scatterplot()}</div>
+      </td>  
+     </tr>
+     <tr>
+      <td colspan="10">
+        <div id="carte">${geo_map()}</div>
+      </td>
+      <td colspan="10">
+        <div id="line_chart">${chart(getKey(variable))}</div>
+      </td>
+     </tr>
+    </table>
+	</div>
   </div>
 </body>
