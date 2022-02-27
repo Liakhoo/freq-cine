@@ -5,13 +5,14 @@
   <link rel="stylesheet" href="dataviz_freqcine_style.css"></link>
   <link rel="shortcut icon" href="#">
   <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+  <script src="https://d3js.org/d3-request.v1.min.js"></script>
 </head>
 <body>
+  <script type="text/javascript" src="main.js"></script>
   <div class="header">
     <h1>Fréquentation et recettes des cinémas en France</h1>
   </div>
   <div class="container">
-    <script src="main_script.js"></script>
     <p>Taille des cinémas : </p>
     <input type="checkbox" id="petit" name="petit" checked>
     <label for="petit">Petit</label>
@@ -20,6 +21,8 @@
     <input type="checkbox" id="grand" name="grand" checked>
     <label for="grand">Grand</label>
     
+    <h2>the value for number is: <script>//document.write(data[0])</script></h2>
+
     <div id="slider">
 		<input type='range' min='${d3.min(rawYear)}' max='${d3.max(rawYear)}' step='1' value='${d3.min(rawYear)}' id='rangeSlider' /> 
 	  <button type="button" id="start">Lancer la lecture automatique</button>

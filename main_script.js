@@ -1,3 +1,7 @@
+const number = 322;
+
+
+
 //importation des données
 data = d3.csv("https://raw.githubusercontent.com/Lyspa/freq-cine/main/freq-cine.csv", d => {
   let res = {}
