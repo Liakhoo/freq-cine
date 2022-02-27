@@ -28,16 +28,25 @@ let parseDate= d3.timeParse("%Y");
 
 
 //Récupération des valeurs par champs
-async function getPromiseValues(ket) {
+async function getPromiseValues(key) {
     let data = await getDataPromise();
     let filteredData = filterTaille(data);
-    let rawYear = getValues(filteredData, ket);
+    let rawYear = getValues(filteredData, key);
     return rawYear;
 
 };
 
 let rawYear = getPromiseValues("year");
 let rawRegion = getPromiseValues("region");
+
+
+//Récupération des propriétés de la France pour la carte
+function getFrancePromise() {
+	return d3.json("https://france-geojson.gregoiredavid.fr/repo/regions.geojson");
+}
+
+let france = getFrancePromise();
+console.log(france);
 
 
 //Détermination des bornes du slider
@@ -48,6 +57,13 @@ rawYear.then((result) => {
 	document.getElementById("rangeSlider").value = d3.min(result);
   });
 
+
+//importation données utiles
+const keys = ["etab","ecrans","fauteuils","seances","entrees","recette","rme","freq","tmof"];
+const names = ["Établissements","Écrans","Fauteuils","Séances","Entrées","Recette","Recette moyenne par entrée","Indice de fréquentation","Taux moyen d'occupation des fauteuils"];
+const keyMap = buildMap(keys,names);
+const unit = ["","","","milliers","millions","M€","€","","%"];
+const unitMap = buildMap(keys,unit);
 
 
 
@@ -62,6 +78,18 @@ function filterTaille(dataset) {
   	}
  	return res;
 };
+
+
+async function parseRegion(element) {
+	let france = await getFrancePromise();
+	let regions = getValues(getValues(france.features,"properties"),"nom");
+	regions.splice(9,5);
+	regions.sort((a, b) => a.localeCompare(b));
+	let rawRegion = await getPromiseValues("region");
+ 	let regionMap = buildMap(rawRegion, regions);
+
+	return regionMap.get(element)
+}
 
 
 function getValues(dataset, key) {
@@ -82,4 +110,13 @@ function getValues(dataset, key) {
   	}
   	L.delete(undefined); //Valeur ajoutée lors de la création du Set, inutile ici.
   	return Array.from(L); //Conversion du Set en Array
+};
+
+
+function buildMap(keys,values) {
+  const map = new Map();
+   for(let i = 0; i < keys.length; i++){
+      map.set(keys[i], values[i]);
+   };
+   return map;
 };
