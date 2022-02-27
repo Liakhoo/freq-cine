@@ -95,10 +95,9 @@ async function chart(k = "freq", q = "ILE-DE-FRANCE",type = "T") {
   return svg.node();
 };
 
-let chart_node = chart();
+let chart_node = chart(); //En vrai, il faudrait mettre en argument getKey(variable) !!!!
 
 chart_node.then((result) => {
-  let chart_cell = document.getElementById("line_chart")
   document.getElementById("line_chart").appendChild(result);
 });
 
