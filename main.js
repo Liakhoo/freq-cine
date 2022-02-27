@@ -176,6 +176,20 @@ function getKey(expr) {
   }
 }
 
+function getType(expr) {
+  switch (expr) {
+    case "P":
+      return "Petite";
+    case "M":
+      return "Moyenne";
+    case "G":
+      return "Grande";
+    default:
+      return "";
+  }
+}
+
+
 
 function mouseOverScatter(region) {
   let nodes = document.querySelectorAll('*[type="scatter"]');
