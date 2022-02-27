@@ -266,3 +266,15 @@ let legend_node = legend_scatterplot();
 legend_node.then((result) => {
   document.getElementById("legend").appendChild(result);
 });
+
+
+
+checkbox_P.addEventListener('change', () => {
+    modify_scatter();
+})
+checkbox_M.addEventListener('change', () => {
+    modify_scatter();
+})
+checkbox_G.addEventListener('change', () => {
+    modify_scatter();
+})
