@@ -45,9 +45,6 @@ function getFrancePromise() {
 	return d3.json("https://france-geojson.gregoiredavid.fr/repo/regions.geojson");
 }
 
-let france = getFrancePromise();
-console.log(france);
-
 
 //Détermination des bornes du slider
 rawYear.then((result) => {
@@ -88,7 +85,18 @@ async function parseRegion(element) {
 	let rawRegion = await getPromiseValues("region");
  	let regionMap = buildMap(rawRegion, regions);
 
-	return regionMap.get(element)
+	return regionMap.get(element);
+}
+
+async function parseRegionInverse(element) {
+	let france = await getFrancePromise();
+  	let regions = getValues(getValues(france.features,"properties"),"nom");
+  	regions.splice(9,5);
+  	regions.sort((a, b) => a.localeCompare(b));
+  	let rawRegion = await getPromiseValues("region");
+  	let regionMap = buildMap(regions, rawRegion);
+
+  return regionMap.get(element);
 }
 
 
@@ -142,5 +150,48 @@ function getTitle(expr) {
       return "du taux moyen d'occupation des fauteuils";
     default:
       return "";
+  }
+}
+
+function getKey(expr) {
+  switch (expr) {
+    case "Recette":
+      return "recette";
+    case "Recette moyenne par entrée":
+      return "rme";
+    case "Nombre d'entrées":
+      return "entrees";
+    case "Nombre de séances":
+      return "seances";
+    case "Nombre d'établissements":
+      return "etab";
+    case "Nombre d'écrans":
+      return "ecrans";
+    case "Nombre de fauteuils":
+      return "fauteuils";
+    case "Taux moyen d'occupation des fauteuils":
+      return "tmof";
+    default:
+      return "";
+  }
+}
+
+
+function mouseOverScatter(region) {
+  let nodes = document.querySelectorAll('*[type="scatter"]');
+  for (let c of nodes){
+        c.style.opacity = 0.15;
+  }
+  let chosen_nodes = document.querySelectorAll(`.scatter_${region.split(' ').join('-').split("'").join('')}`);
+  console.log(chosen_nodes);
+  for (let c of chosen_nodes){
+        c.style.opacity = 1;
+  }
+}
+
+function mouseLeaveScatter() {
+  let nodes = document.querySelectorAll('*[type="scatter"]');
+  for (let c of nodes){
+        c.style.opacity = 1;
   }
 }
