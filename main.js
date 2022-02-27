@@ -1,5 +1,5 @@
 //importation des données
-let url = "https://raw.githubusercontent.com/Lyspa/freq-cine/main/freq-cine.csv";
+let url = "freq-cine.csv";
 let data = [];
 
 d3.csv(url, function(donnees) {
