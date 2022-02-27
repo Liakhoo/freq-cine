@@ -1,2 +1,61 @@
-<h1>Site pour visualiser nos données sur les fréquentations des cinémas</h1>
-<div>again bferuogzo</div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>Fréquentation et recettes des cinémas en France</title>
+  <link rel="stylesheet" href="dataviz_freqcine_style.css"></link>
+  <link rel="shortcut icon" href="#">
+  <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+</head>
+<body>
+  <div class="header">
+    <h1>Fréquentation et recettes des cinémas en France</h1>
+  </div>
+  <div class="container">
+    <p>Taille des cinémas : </p>
+    <input type="checkbox" id="petit" name="petit" checked>
+    <label for="petit">Petit</label>
+    <input type="checkbox" id="moyen" name="moyen" checked>
+    <label for="moyen">Moyen</label>
+    <input type="checkbox" id="grand" name="grand" checked>
+    <label for="grand">Grand</label>
+
+    <div id="slider">
+		<input type='range' min='0' max='100' step='1' value='5' id='rangeSlider' /> 
+	  <button type="button" id="start">Lancer la lecture automatique</button>
+    <button type="button" id="reset">Déselectionner toutes les régions</button>
+    <table width="100%">
+     <colgroup>
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+        <col width="5%"><col width="5%">
+     </colgroup>
+     <tr>
+      <td colspan="17">
+        <div id="scatter">${scatterplot(filteredData, getKey(variable))}</div>
+      </td>
+      <td colspan="20">
+        <div id="legend">${legend_scatterplot()}</div>
+      </td>  
+     </tr>
+     <tr>
+      <td colspan="10">
+        <div id="carte">${geo_map()}</div>
+      </td>
+      <td colspan="10">
+        <div id="line_chart">${chart(getKey(variable))}</div>
+      </td>
+     </tr>
+    </table>
+	</div>
+  </div>
+
+  <script type="text/javascript" src="main.js"></script>
+
+</body>
