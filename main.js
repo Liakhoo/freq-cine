@@ -27,20 +27,33 @@ function getDataPromise() {
 let parseDate= d3.timeParse("%Y");
 
 
-async function doSomething() {
+//Récupération des années
+async function getYears() {
     let data = await getDataPromise();
     let filteredData = filterTaille(data);
-    console.log(filteredData);
+    let rawYear = getValues(filteredData, "year");
+    return rawYear;
 
 };
 
 
-doSomething();
+let rawYear = getYears();
+console.log(rawYear);
+
+
+//Détermination des bornes du slider
+rawYear.then((result) => {
+	let minYear = d3.min(result);
+	document.getElementById("rangeSlider").min = d3.min(result);
+	document.getElementById("rangeSlider").max = d3.max(result);
+	document.getElementById("rangeSlider").value = d3.min(result);
+  });
+
+
 
 
 
 //importation fonctions utiles
-
 function filterTaille(dataset) {
 	let res = [];
 	for (let element of dataset){
@@ -52,4 +65,22 @@ function filterTaille(dataset) {
 };
 
 
-//important donnees utiles
+function getValues(dataset, key) {
+	let L= new Set; //Le Set permet de gérer l'unicité des valeurs
+	//Distinction dans le cadre de l'année car la récupération des valeurs nécessite un traitement du format
+	if (key == "year") {
+    	let i = 0;
+    	while (i < dataset.length) {
+        	L.add(dataset[i].year.getFullYear());
+        	i++;
+      	};
+  	}
+  	else {
+    	for (let element in dataset) {
+      		let test_obj = Object.assign({}, dataset[element]);  //La copie de l'objet permet de récupérer convenablement les valeurs pour n'importe quelle clé.
+      		L.add(test_obj[key]);
+    	} 
+  	}
+  	L.delete(undefined); //Valeur ajoutée lors de la création du Set, inutile ici.
+  	return Array.from(L); //Conversion du Set en Array
+};

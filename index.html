@@ -18,11 +18,9 @@
     <label for="moyen">Moyen</label>
     <input type="checkbox" id="grand" name="grand" checked>
     <label for="grand">Grand</label>
-    
-    <h2>the value for number is: <script>//document.write(data[0])</script></h2>
 
     <div id="slider">
-		<input type='range' min='${d3.min(rawYear)}' max='${d3.max(rawYear)}' step='1' value='${d3.min(rawYear)}' id='rangeSlider' /> 
+		<input type='range' min='0' max='100' step='1' value='5' id='rangeSlider' /> 
 	  <button type="button" id="start">Lancer la lecture automatique</button>
     <button type="button" id="reset">Déselectionner toutes les régions</button>
     <table width="100%">
