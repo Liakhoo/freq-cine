@@ -1,7 +1,13 @@
 //importation des données
-let url = "freq-cine.csv";
+let url = "https://raw.githubusercontent.com/Lyspa/freq-cine/main/freq-cine.csv";
 let data = [];
 
+d3.csv(url, function(error, csv) {
+  if (error) throw error;
+  data = csv;
+});
+
+/*
 d3.csv(url, function(donnees) {
 		for (let d of donnees){
 			res = {}
@@ -20,7 +26,7 @@ d3.csv(url, function(donnees) {
 		    res.tmof = Math.round(+d["tmof"]*100)/100;
 	  		data.push(res);
 	  	}
-});
+});*/
 
 let parseDate= d3.timeParse("%Y");
 
