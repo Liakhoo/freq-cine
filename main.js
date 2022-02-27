@@ -1,34 +1,36 @@
-//import * as d3 from "https://cdn.skypack.dev/d3@7";
-/*d3
-  .select(".target")  // select the elements that have the class 'target'
-  .style("stroke-width", 10) // change their style: stroke width is not equal to 8 pixels*/
-
-
 //importation des données
 let url = "https://raw.githubusercontent.com/Lyspa/freq-cine/main/freq-cine.csv";
+let data = [];
 
-
-let data = d3.csv(url, d => {
-  let res = {};
-  res.region = d["region"];
-  return res;
-});
-
-
-/*let data = d3.csv(url, function(donnees) {
-	  	let res = [];
+d3.csv(url, function(donnees) {
 		for (let d of donnees){
-			row = {}
+			res = {}
 	  		//console.log(d);
-	  		row.region = d["region"];
-	  		res.push(row);
+	  		res.region = d["region"];
+	  		res.year = parseDate(d["annee"]);
+		    res.type = d["type"];
+		    res.etab = +d["nb_etab"];
+		    res.ecrans = +d["nb_ecrans"];
+		    res.fauteuils = +d["nb_fauteuils"];
+		    res.seances = +d["nb_seances"]*1/1;
+		    res.entrees = Math.round(+d["nb_entrees"]/10000)/100;  // en millions
+		    res.recette = Math.round(+d["recette"]/1000)/100; // en millions
+		    res.rme = Math.round(+d["rme"]*100)/100;
+		    res.freq = Math.round(+d["indice_freq"]*100)/100;
+		    res.tmof = Math.round(+d["tmof"]*100)/100;
+	  		data.push(res);
 	  	}
-  console.log(res)
-  return res;
 });
-*/
 
-//var size = Object.keys(data);
-//console.log(size);
+let parseDate= d3.timeParse("%Y");
+
+function parseRegion(element) {
+  let regions = getValues(getValues(france.features,"properties"),"nom");
+  regions.splice(9,5);
+  regions.sort((a, b) => a.localeCompare(b));
+  let regionMap = buildMap(rawRegion, regions);
+
+  return regionMap.get(element);
+}
 
 console.log(data)
