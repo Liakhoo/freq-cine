@@ -27,18 +27,17 @@ function getDataPromise() {
 let parseDate= d3.timeParse("%Y");
 
 
-//Récupération des années
-async function getYears() {
+//Récupération des valeurs par champs
+async function getPromiseValues(ket) {
     let data = await getDataPromise();
     let filteredData = filterTaille(data);
-    let rawYear = getValues(filteredData, "year");
+    let rawYear = getValues(filteredData, ket);
     return rawYear;
 
 };
 
-
-let rawYear = getYears();
-console.log(rawYear);
+let rawYear = getPromiseValues("year");
+let rawRegion = getPromiseValues("region");
 
 
 //Détermination des bornes du slider
