@@ -19,7 +19,7 @@ d3.csv(url, function(donnees) {
 		    res.rme = Math.round(+d["rme"]*100)/100;
 		    res.freq = Math.round(+d["indice_freq"]*100)/100;
 		    res.tmof = Math.round(+d["tmof"]*100)/100;
-		    console.log(res);
+		    //console.log(res);
 	  		data.push(res);
 	  	}
 });
