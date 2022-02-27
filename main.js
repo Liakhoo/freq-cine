@@ -120,3 +120,27 @@ function buildMap(keys,values) {
    };
    return map;
 };
+
+
+function getTitle(expr) {
+  switch (expr) {
+    case "Recette":
+      return "des recettes";
+    case "Recette moyenne par entrée":
+      return "de la recette moyenne par entrée (RME)";
+    case "Nombre d'entrées":
+      return "du nombre d'entrees";
+    case "Nombre de séances":
+      return "du nombre de séances";
+    case "Nombre d'établissements":
+      return "du nombre d'établissements";
+    case "Nombre d'écrans":
+      return "du nombre d'écrans";
+    case "Nombre de fauteuils":
+      return "du nombre de fauteuils";
+    case "Taux moyen d'occupation des fauteuils":
+      return "du taux moyen d'occupation des fauteuils";
+    default:
+      return "";
+  }
+}

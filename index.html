@@ -24,7 +24,7 @@
     <label for="grand">Grand</label>
 
     <div id="slider">
-		<input type='range' min='0' max='100' step='1' value='5' id='rangeSlider' /> 
+		<input type='range' min='2004' max='2020' step='1' value='2004' id='rangeSlider' /> 
 	  <button type="button" id="start">Lancer la lecture automatique</button>
     <button type="button" id="reset">Déselectionner toutes les régions</button>
     <table width="100%">
@@ -45,7 +45,7 @@
         <div id="scatter">${scatterplot(filteredData, getKey(variable))}</div>
       </td>
       <td colspan="20">
-        <div id="legend">${legend_scatterplot()}</div>
+        <div id="legend"></div>
       </td>  
      </tr>
      <tr>
