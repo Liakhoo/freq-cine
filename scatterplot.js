@@ -63,6 +63,14 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
   let global_tmax = calculateMax(dataset_P, dataset_M, dataset_G, "etab");
 
 
+  //Contenu de parseRegion
+  let france = await getFrancePromise();
+  let regions = getValues(getValues(france.features,"properties"),"nom");
+  regions.splice(9,5);
+  regions.sort((a, b) => a.localeCompare(b));
+  let rawRegion = await getPromiseValues("region");
+  let regionMap = buildMap(rawRegion, regions);
+
   const svg = d3.create("svg")
       .attr("viewBox", [0, 0, width+margin.left+margin.right, height+margin.top+margin.bottom])
 
@@ -114,7 +122,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     svg.selectAll("circle").data(newdataset_P)
     .enter()
     .append("circle")
-    .attr("class", d => "scatter_" /*+ parseRegion(d.region).split(' ').join('-').split("'").join('')*/)
+    .attr("class", d => "scatter_" + regionMap.get(d.region).split(' ').join('-').split("'").join(''))
     .attr("type", "scatter")
     .attr("cx", d => x(d[var_x]))
     .attr("cy", d => y(d[var_y]))
@@ -122,14 +130,13 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     .attr("fill", d => color(d.region))
     .attr("stroke", "black")
     .on("mouseover", function(d) {
-        console.log(d.srcElement.__data__.region);
-        mouseOverScatter(parseRegion(d.srcElement.__data__.region));
+        mouseOverScatter(regionMap.get(d.region));
       })
       .on("mouseleave", function(d) {
         mouseLeaveScatter();
       })
     .append("title")
-    .text(d => "Région : "/*+ parseRegion(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("P") + "\nNombre d'établissements : " + d.etab + "\n\n" + getTitle(variable) + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y]*/)
+    .text(d => "Région : "+ regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("P") + "\nNombre d'établissements : " + d.etab + "\n\n" + getTitle(variable) + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y])
       
   }
   
@@ -138,7 +145,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     svg.selectAll("rect").data(newdataset_M)
       .enter()
       .append("rect")
-      .attr("class", d => "scatter_" /*+ parseRegion(d.region).split(' ').join('-').split("'").join('')*/)
+      .attr("class", d => "scatter_" + regionMap.get(d.region).split(' ').join('-').split("'").join(''))
       .attr("type", "scatter")
       .attr("x", d => x(d[var_x]) - taille(d["etab"]))
       .attr("y", d => y(d[var_y]) - taille(d["etab"]))
@@ -147,14 +154,13 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
       .attr("fill", d => color(d.region))
       .attr("stroke", "black")
       .on("mouseover", function(d) {
-        console.log(d.srcElement.__data__.region);
-        mouseOverScatter(parseRegion(d.srcElement.__data__.region));
+        mouseOverScatter(regionMap.get(d.region));
       })
       .on("mouseleave", function(d) {
         mouseLeaveScatter();
       })
       .append("title")
-      .text(d => "Région : " /*+ parseRegion(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("M") + "\nNombre d'établissements : " + d.etab + "\n\n" + getTitle(variable) + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y]*/)
+      .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("M") + "\nNombre d'établissements : " + d.etab + "\n\n" + getTitle(variable) + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y])
   }
 
   //Triangles
@@ -162,7 +168,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     svg.selectAll("polygon").data(newdataset_G)
       .enter()
       .append("polygon")
-      .attr("class", d => "scatter_" /*+ parseRegion(d.region).split(' ').join('-').split("'").join('')*/)
+      .attr("class", d => "scatter_" + regionMap.get(d.region).split(' ').join('-').split("'").join(''))
       .attr("type", "scatter")
       .attr("points", d => {
             return String(x(d[var_x]) - taille(d["etab"])) + "," + String(y(d[var_y]) + taille(d["etab"])) + " " + String(x(d[var_x])) + "," + String(y(d[var_y]) - taille(d["etab"])) + " " + String(x(d[var_x]) + taille(d["etab"])) + "," + String(y(d[var_y]) + taille(d["etab"]));
@@ -170,14 +176,13 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
       .attr("fill", d => color(d.region))
       //.attr("stroke", "black")
       .on("mouseover", function(d) {
-        console.log(d.srcElement.__data__.region);
-        mouseOverScatter(parseRegion(d.srcElement.__data__.region));
+        mouseOverScatter(regionMap.get(d.region));
       })
       .on("mouseleave", function(d) {
         mouseLeaveScatter();
       })
       .append("title")
-      .text(d => "Région : " /*+ parseRegion(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("G") + "\nNombre d'établissements : " + d.etab + "\n\n" + getTitle(variable) + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y]*/)
+      .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("G") + "\nNombre d'établissements : " + d.etab + "\n\n" + getTitle(variable) + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y])
   }
 
     //Création du titre du graphique
@@ -186,7 +191,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     .style("text-anchor", "middle")
     .attr("x", (width + margin.left + margin.right)/2)
     .attr("y", margin.top)
-    //.text(`Indice de fréquentation en fonction ${getTitle(variable)} `);
+    .text(`Indice de fréquentation en fonction ${getTitle(var_x)} `);
 
   //Creation du titre de l'axe des abscisses
   svg.append("text")
@@ -195,7 +200,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     .style("text-anchor", "middle")
     .attr("x", (width + margin.left + margin.right)/2)
     .attr("y", height + margin.bottom + 5)
-    //.text(`${keyMap.get(getKey(variable))} (${unitMap.get(getKey(variable))})`);
+    .text(`${keyMap.get(var_x)} (${unitMap.get(var_x)})`);
 
   //Creation du titre de l'axe des ordonnees
   svg.append("text")
@@ -229,6 +234,14 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
   d3.schemePaired.push("#F236BB")
   const color = d3.scaleOrdinal(d3.schemePaired);
 
+  //Contenu de parseRegion
+  let france = await getFrancePromise();
+  let regions = getValues(getValues(france.features,"properties"),"nom");
+  regions.splice(9,5);
+  regions.sort((a, b) => a.localeCompare(b));
+  //let rawRegion = await getPromiseValues("region");
+  let regionMap = buildMap(rawRegion, regions);
+
 
   svg.selectAll("rect").data(rawRegion)
     .enter()
@@ -246,15 +259,15 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     .attr("x", margin.left + 12)
     .attr("y", (d, i) => i * 10 + 29)
     .style("font-size","5px")
-    .text(d => parseRegion(d)) //À corriger !!!!!!!
+    .text(d => regionMap.get(d))//parseRegion(d)) //À corriger !!!!!!!
 
   return svg.node();
 }
 
 
 
-
-let scatter_node = scatterplot(); // normalement scatterplot(filteredData, getKey(variable))
+console.log(getKey(variable));
+let scatter_node = scatterplot(getKey(variable)); // normalement scatterplot(filteredData, getKey(variable))
 
 scatter_node.then((result) => {
   document.getElementById("scatter").appendChild(result);
@@ -266,15 +279,3 @@ let legend_node = legend_scatterplot();
 legend_node.then((result) => {
   document.getElementById("legend").appendChild(result);
 });
-
-
-
-checkbox_P.addEventListener('change', () => {
-    modify_scatter();
-})
-checkbox_M.addEventListener('change', () => {
-    modify_scatter();
-})
-checkbox_G.addEventListener('change', () => {
-    modify_scatter();
-})

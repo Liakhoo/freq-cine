@@ -132,22 +132,22 @@ function buildMap(keys,values) {
 
 function getTitle(expr) {
   switch (expr) {
-    case "Recette":
+    case "recette":
       return "des recettes";
-    case "Recette moyenne par entrée":
+    case "rme":
       return "de la recette moyenne par entrée (RME)";
-    case "Nombre d'entrées":
+    case "entrees":
       return "du nombre d'entrees";
-    case "Nombre de séances":
+    case "seances":
       return "du nombre de séances";
-    case "Nombre d'établissements":
+    case "etab":
       return "du nombre d'établissements";
     case "Nombre d'écrans":
-      return "du nombre d'écrans";
+      return "ecrans";
     case "Nombre de fauteuils":
-      return "du nombre de fauteuils";
+      return "fauteuils";
     case "Taux moyen d'occupation des fauteuils":
-      return "du taux moyen d'occupation des fauteuils";
+      return "tmof";
     default:
       return "";
   }
@@ -197,7 +197,7 @@ function mouseOverScatter(region) {
         c.style.opacity = 0.15;
   }
   let chosen_nodes = document.querySelectorAll(`.scatter_${region.split(' ').join('-').split("'").join('')}`);
-  console.log(chosen_nodes);
+  //console.log(chosen_nodes);
   for (let c of chosen_nodes){
         c.style.opacity = 1;
   }

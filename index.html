@@ -15,6 +15,7 @@
     <h1>Fréquentation et recettes des cinémas en France</h1>
   </div>
   <div class="container">
+    <select id="VarSelect"></select>
     <p>Taille des cinémas : </p>
     <input type="checkbox" id="petit" name="petit" checked>
     <label for="petit">Petit</label>
@@ -26,6 +27,7 @@
     <div id="slider">
 		<input type='range' min='2004' max='2020' step='1' value='2004' id='rangeSlider' /> 
 	  <button type="button" id="start">Lancer la lecture automatique</button>
+    <button type="button" id="stop">Arrêter la lecture automatique</button>
     <button type="button" id="reset">Déselectionner toutes les régions</button>
     <table width="100%">
      <colgroup>
@@ -50,7 +52,7 @@
      </tr>
      <tr>
       <td colspan="10">
-        <div id="carte">${geo_map()}</div>
+        <div id="carte"></div>
       </td>
       <td colspan="10">
         <div id="line_chart"></div>
@@ -61,7 +63,9 @@
   </div>
 
   
+<script type="text/javascript" src="animation.js"></script>
 <script type="text/javascript" src="chart.js"></script>
 <script type="text/javascript" src="scatterplot.js"></script>
 <script type="text/javascript" src="geo_map.js"></script>
+
 </body>
