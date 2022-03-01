@@ -99,12 +99,15 @@ async function geo_map(w=600, h=500, g) {
       		chosen_node.style.fill = "red";
     
       		// Changement de la line chart
+          let variable_node = document.getElementById('VarSelect');
+          let variable = variable_node.value;
       		let q_var = [];
           for (let element of chosen_region){
             q_var.push(regionMap.get(element));
           }
       		let td_node = document.querySelectorAll('#line_chart');  //récupération du td contenant le line chart
       		let svg_node = td_node[0].querySelectorAll('svg'); //recuperation du noeud svg du line chart
+          console.log(q_var);
           let chart_node = chart(getKey(variable),q_var,"T"); // récupération noeud nouveau line chart
           chart_node.then((result) => {
             td_node[0].replaceChild(result, svg_node[0]);

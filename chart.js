@@ -31,6 +31,7 @@ async function chart(k = "freq", q = [],type = "T") {
 
   }
   else{
+    //console.log(q)
     var newdataset = data.filter(d => d.region == q[0]);
     newdataset = newdataset.filter(d => d.type == type);
     dataValue = getValues(newdataset,k);

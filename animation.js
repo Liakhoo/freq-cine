@@ -105,14 +105,21 @@ function modify_scatter() {
 };
 
 
-modify_linechart = () => {
+async function modify_linechart() {
   let td_node = document.querySelectorAll('#line_chart');  //récupération du div contenant le scatterplot
   let svg_node = td_node[0].querySelectorAll('svg'); //recuperation du noeud svg du scatterplot
 
   let variable_node = document.getElementById('VarSelect');
   let variable = variable_node.value;
 
-  let scatter_node = chart(getKey(variable)); //Nouveau scatterplot
+  let choice = [];
+  for (let element of chosen_region){
+    res = await parseRegionInverse(element);
+    choice.push(res);
+  }
+  console.log(choice);
+
+  let scatter_node = chart(getKey(variable), choice); //Nouveau scatterplot
   scatter_node.then((result) => {
     td_node[0].replaceChild(result, svg_node[0]); // mise à jour du scatterplot
   });
