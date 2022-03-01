@@ -81,7 +81,19 @@ async function geo_map(w=600, h=500, g) {
       		//Changement titre carte
       		let title_node = document.querySelectorAll('.title');
       		//console.log(title_node);
-      		title_node[0].innerHTML = `La région choisie est : ${chosen_region[0]}`;
+          let nbRegions = chosen_region.length;
+          if (nbRegions == 1){
+            title_node[0].innerHTML = `La région choisie est : ${chosen_region[0]}`;
+          }
+          else{
+            region_names = chosen_region[0];
+            for (let i=1; i < nbRegions - 1; i++){
+              region_names += ", " + chosen_region[i];
+            }
+            region_names += " et " + chosen_region[nbRegions - 1];
+            title_node[0].innerHTML = `Les régions choisies sont : ${region_names}`;
+          }
+      		
       
       		// Coloration en rouge de la région sélectionnée
       		chosen_node.style.fill = "red";
