@@ -42,22 +42,22 @@
         <col width="5%"><col width="5%">
         <col width="5%"><col width="5%">
      </colgroup>
-     <tr>
-      <td colspan="17">
-        <div id="scatter"></div>
-      </td>
-      <td colspan="20">
-        <div id="legend"></div>
-      </td>
-      <td colspan="10">
 	<tr>
-          <div id="carte"></div>
-	</tr>
-	<tr>
-	  <div id="line_chart"></div>
-	</tr>
-      </td>
-     </tr>
+	  <td colspan="17">
+	    <div id="scatter">${scatterplot(filteredData, getKey(variable))}</div>
+	  </td>
+	  <td colspan="20">
+	    <div id="legend">${legend_scatterplot()}</div>
+	  </td>  
+	 </tr>
+	 <tr>
+	  <td colspan="10">
+	    <div id="carte">${geo_map()}</div>
+	  </td>
+	  <td colspan="10">
+	    <div id="line_chart">${chart(getKey(variable))}</div>
+	  </td>
+	 </tr>
     </table>
 	</div>
   </div>
