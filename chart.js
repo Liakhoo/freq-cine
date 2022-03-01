@@ -2,7 +2,7 @@
 
 
 
-async function chart(k = "freq", q = "ILE-DE-FRANCE",type = "T") {
+async function chart(k = "freq", q = ["ILE-DE-FRANCE","OCCITANIE"],type = "T") {
   const margin = ({top: 45, right: 30, bottom: 50, left: 60})
   const height = 350;
   const width = 750;
@@ -15,16 +15,17 @@ async function chart(k = "freq", q = "ILE-DE-FRANCE",type = "T") {
       .attr("width", 3*width/4)
       .attr("height", 3*height/4);
 
-  //Filtrage du jeu de données selon le pays et la date choisis
-  let data = await getDataPromise();
-  var newdataset = data.filter(d => d.region == q);
-  newdataset = newdataset.filter(d => d.type == type);
 
   //Récupération des données à afficher
+  let data = await getDataPromise();
+  var newdataset = data.filter(d => d.region == q[0]);
+  newdataset = newdataset.filter(d => d.type == type);
   const dataValue = getValues(newdataset,k);
   const rawYear = getValues(data, "year").sort();
-  let regionName = await parseRegion(q);
-  console.log(parseRegion(q));
+  let regionName = await parseRegion(q[0]);
+  
+  d3.schemePaired.push("#F236BB")
+  const color = d3.scaleOrdinal(d3.schemePaired)
 
   //Mise à l'échelle de l'axe des abscisses
   const x = d3.scaleTime()
@@ -41,13 +42,22 @@ async function chart(k = "freq", q = "ILE-DE-FRANCE",type = "T") {
     .x((d, i) => x(d.year)-margin.left)
     .y(d => y(d[k]))
 
-  svg.append("g").attr("transform", `translate(${margin.left}, 0)`).selectAll("path")
-    .data([newdataset])
+
+  let dataset;
+  //Création des lignes
+  for (region of q){
+    console.log(region);
+    dataset = data.filter(d => d.region == region);
+    dataset = dataset.filter(d => d.type == type);
+
+    svg.append("g").attr("transform", `translate(${margin.left}, 0)`).selectAll("path")
+    .data([dataset])
     .enter()
     .append("path")
     .attr("d", d => line(d))
     .attr("fill", "none")
-    .attr("stroke", "blue")
+    .attr("stroke", d => "blue")
+  }
 
   //Création du titre du graphique
   svg.append("text")

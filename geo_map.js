@@ -94,7 +94,7 @@ async function geo_map(w=700, h=500, g) {
       		let q_var = regionMap.get(chosen_region);
       		let td_node = document.querySelectorAll('#line_chart');  //récupération du td contenant le line chart
       		let svg_node = td_node[0].querySelectorAll('svg'); //recuperation du noeud svg du line chart
-          let chart_node = chart(getKey(variable),q_var,"T"); // récupération noeud nouveau line chart
+          let chart_node = chart(getKey(variable),[q_var],"T"); // récupération noeud nouveau line chart
           chart_node.then((result) => {
             td_node[0].replaceChild(result, svg_node[0]);
           });
