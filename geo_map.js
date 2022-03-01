@@ -76,7 +76,6 @@ async function geo_map(w=600, h=500, g) {
         		c.style.fill = "rgb(104,104,104)";
         		c.style.stroke = "#000000";
       		}
-      		chosen_node = document.querySelector(`.${d.properties.nom.split(' ').join('-').split("'").join('')}`);
       		chosen_region.push(d.properties.nom);
       		
       		//Changement titre carte
@@ -96,7 +95,11 @@ async function geo_map(w=600, h=500, g) {
       		
       
       		// Coloration en rouge de la région sélectionnée
-      		chosen_node.style.fill = "red";
+          for (let name of chosen_region){
+            chosen_node = document.querySelector(`.${name.split(' ').join('-').split("'").join('')}`);
+            chosen_node.style.fill = "red";
+          }
+      		
     
       		// Changement de la line chart
           let variable_node = document.getElementById('VarSelect');
