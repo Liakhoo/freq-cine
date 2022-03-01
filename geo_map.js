@@ -67,8 +67,6 @@ async function geo_map(w=600, h=500, g) {
       		}
       	})
     	.on("click", (d,i) => {
-      		//Modification du scatterplot
-      		mouseOverScatter(d.properties.nom);
       		isClicked = true;
       		
       		//Modification de la carte, remise en gris des régions non sélectionnées
@@ -99,6 +97,9 @@ async function geo_map(w=600, h=500, g) {
           chart_node.then((result) => {
             td_node[0].replaceChild(result, svg_node[0]);
           });
+
+          //Modification du scatterplot
+          mouseOverScatter(d.properties.nom);
       	})
     	.on("mouseleave", function(d) {
       		tooltip.style('opacity', 0).style('visibility','hidden');

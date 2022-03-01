@@ -200,10 +200,22 @@ function mouseOverScatter(region) {
   for (let c of nodes){
         c.style.opacity = 0.15;
   }
-  let chosen_nodes = document.querySelectorAll(`.scatter_${region.split(' ').join('-').split("'").join('')}`);
-  //console.log(chosen_nodes);
-  for (let c of chosen_nodes){
-        c.style.opacity = 1;
+
+  if (!isClicked){
+    let chosen_nodes = document.querySelectorAll(`.scatter_${region.split(' ').join('-').split("'").join('')}`);
+    //console.log(chosen_nodes);
+    for (let c of chosen_nodes){
+          c.style.opacity = 1;
+    }
+  }
+  else{
+    for (let region of chosen_region){
+      let chosen_nodes = document.querySelectorAll(`.scatter_${region.split(' ').join('-').split("'").join('')}`);
+      //console.log(chosen_nodes);
+      for (let c of chosen_nodes){
+            c.style.opacity = 1;
+      }
+    }
   }
 }
 
