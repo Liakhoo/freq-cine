@@ -2,8 +2,6 @@ async function geo_map(w=600, h=500, g) {
 	// initialisation du tooltip  
 	const svg = g || d3.create("svg")
       .attr("viewBox", [0, 0, w, h])
-      .attr("width", w/2)
-      .attr("height", h/2);
 
 	let margin = { top: 10, right: 10, bottom: 10, left: 10 };
 

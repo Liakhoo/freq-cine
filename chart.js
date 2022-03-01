@@ -8,8 +8,6 @@ async function chart(k = "freq", q = [],type = "T") {
   //Création du svg
   const svg = d3.create("svg")
       .attr("viewBox", [0, 0, width, height])
-      .attr("width", 3*width/4)
-      .attr("height", 3*height/4);
 
       //Récupération des données à afficher
   let data = await getDataPromise();
