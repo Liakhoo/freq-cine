@@ -54,6 +54,9 @@ d3.select("#start").on("click", function() {
 
 
 d3.select("#reset").on("click",function () {
+  let variable_node = document.getElementById('VarSelect');
+  let variable = variable_node.value;
+
   //Réinitialisation carte
   let map_node = document.querySelector("#carte").querySelector("svg")
   let nodes = map_node.querySelectorAll('path[type="region"]');
