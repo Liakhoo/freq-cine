@@ -16,9 +16,9 @@ async function geo_map(w=700, h=500, g) {
     	.translate([width / 2, height / 2]);
 
   let path = d3.geoPath(projection);
-  var isClicked = false
- 	var chosen_node = '' // définition de chosen_node pour éviter les erreurs d'exécution
- 	var chosen_region = '' // définition de chosen_region pour éviter les erreurs d'exécution
+  //var isClicked = false
+ 	//var chosen_node = '' // définition de chosen_node pour éviter les erreurs d'exécution
+ 	//var chosen_region = '' // définition de chosen_region pour éviter les erreurs d'exécution
 
   //Contenu de parseRegionInverse
   let france = await getFrancePromise();

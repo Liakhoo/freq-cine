@@ -70,6 +70,14 @@ d3.select("#reset").on("click",function () {
   chart_node.then((result) => {
     td_node[0].replaceChild(result, svg_node[0]);
   });
+
+  //Mise à jour scatterplot
+  mouseLeaveScatter();
+
+  //Réinitialisation variables
+  isClicked = false;
+  chosen_node = '';
+  chosen_region = '';
 });
 
 

@@ -1,6 +1,9 @@
 //importation des données
 let url = "https://raw.githubusercontent.com/Lyspa/freq-cine/main/freq-cine.csv";
 let data = [];
+let isClicked = false;
+var chosen_node = '' // définition de chosen_node pour éviter les erreurs d'exécution
+  var chosen_region = '' // définition de chosen_region pour éviter les erreurs d'exécution
 
 function getDataPromise() {
 	let dataPromise = d3.csv(url, function(d) {
