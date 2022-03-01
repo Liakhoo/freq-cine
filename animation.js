@@ -89,7 +89,7 @@ d3.select("#stop").on("click", function(myTimer) {
 
 
 //Fonctions
-modify_scatter = () => {
+function modify_scatter() {
   let td_node = document.querySelectorAll('#scatter');  //récupération du div contenant le scatterplot
   let svg_node = td_node[0].querySelectorAll('svg'); //recuperation du noeud svg du scatterplot
 

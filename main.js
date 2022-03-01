@@ -195,6 +195,7 @@ function getType(expr) {
 
 
 function mouseOverScatter(region) {
+  console.log(region);
   let nodes = document.querySelectorAll('*[type="scatter"]');
   for (let c of nodes){
         c.style.opacity = 0.15;
