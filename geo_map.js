@@ -80,21 +80,24 @@ async function geo_map(w=700, h=500, g) {
         		c.style.stroke = "#000000";
       		}
       		chosen_node = document.querySelector(`.${d.properties.nom.split(' ').join('-').split("'").join('')}`);
-      		chosen_region = d.properties.nom;
+      		chosen_region.push(d.properties.nom);
       		
       		//Changement titre carte
       		let title_node = document.querySelectorAll('.title');
       		//console.log(title_node);
-      		title_node[0].innerHTML = `La région choisie est : ${chosen_region}`;
+      		title_node[0].innerHTML = `La région choisie est : ${chosen_region[0]}`;
       
       		// Coloration en rouge de la région sélectionnée
       		chosen_node.style.fill = "red";
     
       		// Changement de la line chart
-      		let q_var = regionMap.get(chosen_region);
+      		let q_var = [];
+          for (let element of chosen_region){
+            q_var.push(regionMap.get(element));
+          }
       		let td_node = document.querySelectorAll('#line_chart');  //récupération du td contenant le line chart
       		let svg_node = td_node[0].querySelectorAll('svg'); //recuperation du noeud svg du line chart
-          let chart_node = chart(getKey(variable),[q_var],"T"); // récupération noeud nouveau line chart
+          let chart_node = chart(getKey(variable),q_var,"T"); // récupération noeud nouveau line chart
           chart_node.then((result) => {
             td_node[0].replaceChild(result, svg_node[0]);
           });

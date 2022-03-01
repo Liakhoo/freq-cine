@@ -77,7 +77,7 @@ d3.select("#reset").on("click",function () {
   //Réinitialisation variables
   isClicked = false;
   chosen_node = '';
-  chosen_region = '';
+  chosen_region = [];
 });
 
 
