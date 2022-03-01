@@ -29,7 +29,7 @@ async function chart(k = "freq", q = [],type = "T") {
     q = await getPromiseValues("region");
     var newdataset = data.filter(d => d.region == q[7]); //Île-de-France
     newdataset = newdataset.filter(d => d.type == type);
-    console.log(newdataset);
+    //console.log(newdataset);
     dataValue = getValues(newdataset,k);
     rawYear = getValues(data, "year").sort();
     regionName = "Toutes les régions de France";

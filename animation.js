@@ -55,13 +55,21 @@ d3.select("#start").on("click", function() {
 
 d3.select("#reset").on("click",function () {
   let map_node = document.querySelector("#carte").querySelector("svg")
-  console.log(map_node)
+  //console.log(map_node)
   let nodes = map_node.querySelectorAll('path[type="region"]');
-  console.log(nodes)
+  //console.log(nodes)
       for (let c of nodes){
         c.style.fill = "rgb(104,104,104)";
         c.style.stroke = "#000000";
       }
+  //Mise à jour line chart
+  let q_var = [];
+  let td_node = document.querySelectorAll('#line_chart');  //récupération du td contenant le line chart
+  let svg_node = td_node[0].querySelectorAll('svg'); //recuperation du noeud svg du line chart
+  let chart_node = chart(getKey(variable),q_var,"T"); // récupération noeud nouveau line chart
+  chart_node.then((result) => {
+    td_node[0].replaceChild(result, svg_node[0]);
+  });
 });
 
 
