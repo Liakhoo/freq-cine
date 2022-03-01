@@ -1,8 +1,8 @@
 async function scatterplot(var_x = "recette", var_y = "freq") {
   // set the dimensions and margins of the graph
-  var margin = {top: 30, right: 0, bottom: 10, left: 30},
-      width = 400 - margin.left - margin.right,
-      height = 300 - margin.top - margin.bottom;
+  var margin = {top: 30, right: 0, bottom: 10, left: 50},
+      width = 550 - margin.left - margin.right,
+      height = 350 - margin.top - margin.bottom;
 
   //Préparation données
   let date = d3.select("#rangeSlider").property("value");
@@ -227,7 +227,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     .attr("text-anchor", "middle")
     .attr("x", 0)
     .attr("y", 0)
-    .attr("transform", `rotate(-90) translate(${-(height + margin.bottom + margin.top)/2 +10},10)`)
+    .attr("transform", `rotate(-90) translate(${-(height + margin.bottom + margin.top)/2 +10},${margin.left-20})`)
     .text("Indice de fréquentation");
 
   return svg.node();
@@ -236,13 +236,13 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
 
   async function legend_scatterplot() {
   // set the dimensions and margins of the graph
-  var margin = {top: 30, right: 60, bottom: 5, left: 5},
-      width =450 - margin.left - margin.right,
+  var margin = {top: 30, right: 10, bottom: 5, left: 5},
+      width =260 - margin.left - margin.right,
       height = 200 - margin.top - margin.bottom;
 
   const svg = d3.create("svg")
       .attr("viewBox", [0, 0, width+margin.left+margin.right, height+margin.top+margin.bottom])
-      .attr("width", 2*(width+margin.left+margin.right))
+      .attr("width", (width+margin.left+margin.right))
       .attr("height", 2*(height+margin.top+margin.bottom))
 
   //Préparation données
@@ -264,18 +264,18 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     .enter()
     .append("rect")
     .attr("x", margin.left)
-    .attr("y", (d, i) => i * 10 + 25)
-    .attr("width", 5)
-    .attr("height", 5)
+    .attr("y", (d, i) => (i-3) * 20 + 25)
+    .attr("width", 10)
+    .attr("height", 10)
     .attr("fill", d => color(d))
     .attr("stroke", "black")
 
   svg.selectAll("text").data(rawRegion)
     .enter()
     .append("text")
-    .attr("x", margin.left + 12)
-    .attr("y", (d, i) => i * 10 + 29)
-    .style("font-size","5px")
+    .attr("x", margin.left + 15)
+    .attr("y", (d, i) => (i-3) * 20 + 35)
+    .style("font-size","15px")
     .text(d => regionMap.get(d))//parseRegion(d)) //À corriger !!!!!!!
 
   return svg.node();

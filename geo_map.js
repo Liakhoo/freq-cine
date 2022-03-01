@@ -1,4 +1,4 @@
-async function geo_map(w=700, h=500, g) {
+async function geo_map(w=600, h=500, g) {
 	// initialisation du tooltip  
 	const svg = g || d3.create("svg")
       .attr("viewBox", [0, 0, w, h])

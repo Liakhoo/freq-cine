@@ -5,7 +5,7 @@
 async function chart(k = "freq", q = [],type = "T") {
   const margin = ({top: 45, right: 30, bottom: 50, left: 60})
   const height = 350;
-  const width = 750;
+  const width = 600;
   //const key = getKey(variable)
   //const unit = getUnit(variable)
 
