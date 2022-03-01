@@ -1,7 +1,3 @@
-
-
-
-
 async function chart(k = "freq", q = [],type = "T") {
   const margin = ({top: 45, right: 30, bottom: 50, left: 60})
   const height = 350;
@@ -16,8 +12,9 @@ async function chart(k = "freq", q = [],type = "T") {
       //Récupération des données à afficher
   let data = await getDataPromise();
     
-  d3.schemePaired.push("#F236BB")
-  const color = d3.scaleOrdinal(d3.schemePaired)
+  d3.schemePaired.push("#F236BB");
+  const rawRegion = getValues(data, "region");
+  const color = d3.scaleOrdinal(rawRegion,d3.schemePaired);
 
   var dataValue;
   var rawYear;
