@@ -69,7 +69,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
   let regions = getValues(getValues(france.features,"properties"),"nom");
   regions.splice(9,5);
   regions.sort((a, b) => a.localeCompare(b));
-  let rawRegion = await getPromiseValues("region");
+  const rawRegion = getValues(data, "region");
   let regionMap = buildMap(rawRegion, regions);
 
   const svg = d3.create("svg")
@@ -88,8 +88,9 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     .domain([global_tmin, global_tmax])
     .range([1, 10])
 
-  d3.schemePaired.push("#F236BB")
-  const color = d3.scaleOrdinal(d3.schemePaired)
+  d3.schemePaired.push("#F236BB");
+  //const rawRegion = getValues(data, "region");
+  const color = d3.scaleOrdinal(rawRegion,d3.schemePaired);
 
   //Axes
   let xAxis = g => g
@@ -248,8 +249,8 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
   //Préparation données
   let data = await getDataPromise();
   const rawRegion = getValues(data, "region");
-  d3.schemePaired.push("#F236BB")
-  const color = d3.scaleOrdinal(d3.schemePaired);
+  d3.schemePaired.push("#F236BB");
+  const color = d3.scaleOrdinal(rawRegion,d3.schemePaired);
 
   //Contenu de parseRegion
   let france = await getFrancePromise();
