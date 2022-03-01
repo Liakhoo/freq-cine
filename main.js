@@ -90,11 +90,11 @@ async function parseRegion(element) {
 
 async function parseRegionInverse(element) {
 	let france = await getFrancePromise();
-  	let regions = getValues(getValues(france.features,"properties"),"nom");
-  	regions.splice(9,5);
-  	regions.sort((a, b) => a.localeCompare(b));
-  	let rawRegion = await getPromiseValues("region");
-  	let regionMap = buildMap(regions, rawRegion);
+  let regions = getValues(getValues(france.features,"properties"),"nom");
+  regions.splice(9,5);
+  regions.sort((a, b) => a.localeCompare(b));
+  let rawRegion = await getPromiseValues("region");
+  let regionMap = buildMap(regions, rawRegion);
 
   return regionMap.get(element);
 }

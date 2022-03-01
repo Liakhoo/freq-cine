@@ -15,11 +15,18 @@ async function geo_map(w=700, h=500, g) {
     	.scale(2600)
     	.translate([width / 2, height / 2]);
 
-   	let path = d3.geoPath(projection);
-   	var isClicked = false
+  let path = d3.geoPath(projection);
+  var isClicked = false
  	var chosen_node = '' // définition de chosen_node pour éviter les erreurs d'exécution
  	var chosen_region = '' // définition de chosen_region pour éviter les erreurs d'exécution
- 	let france = await getFrancePromise();
+
+  //Contenu de parseRegionInverse
+  let france = await getFrancePromise();
+  let regions = getValues(getValues(france.features,"properties"),"nom");
+  regions.splice(9,5);
+  regions.sort((a, b) => a.localeCompare(b));
+  let rawRegion = await getPromiseValues("region");
+  let regionMap = buildMap(regions, rawRegion);
 
  	var tooltip = d3.select('body')
     	.append('div')
@@ -33,8 +40,6 @@ async function geo_map(w=700, h=500, g) {
   	
   	var tooltipStats = tooltip.append('div')
         .attr('class', 'stats');
-
-     console.log(france);
 
     // world map
   	svg.append("g").selectAll("path")
@@ -79,18 +84,20 @@ async function geo_map(w=700, h=500, g) {
       		
       		//Changement titre carte
       		let title_node = document.querySelectorAll('.title');
-      		console.log(title_node);
+      		//console.log(title_node);
       		title_node[0].innerHTML = `La région choisie est : ${chosen_region}`;
       
       		// Coloration en rouge de la région sélectionnée
       		chosen_node.style.fill = "red";
     
       		// Changement de la line chart
-      		let q_var = parseRegionInverse(chosen_region);
-      		console.log(q_var);
+      		let q_var = regionMap.get(chosen_region);
       		let td_node = document.querySelectorAll('#line_chart');  //récupération du td contenant le line chart
       		let svg_node = td_node[0].querySelectorAll('svg'); //recuperation du noeud svg du line chart
-      		td_node[0].replaceChild(chart(getKey(variable),q_var,"T"), svg_node[0]);
+          let chart_node = chart(getKey(variable),q_var,"T"); // récupération noeud nouveau line chart
+          chart_node.then((result) => {
+            td_node[0].replaceChild(result, svg_node[0]);
+          });
       	})
     	.on("mouseleave", function(d) {
       		tooltip.style('opacity', 0).style('visibility','hidden');
