@@ -74,7 +74,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
 
   const svg = d3.create("svg")
       .attr("viewBox", [0, 0, width+margin.left+margin.right, height+margin.top+margin.bottom])
-      .attr("width", document.getElementById('scatter').clientWidth)
+      //.attr("width", document.getElementById('scatter').clientWidth)
       //.attr("height", 3*(height+margin.top+margin.bottom)/2);
 
   const x = d3.scaleLinear()
