@@ -60,7 +60,7 @@ async function geo_map(w=600, h=500, g) {
       			d3.select(this).style("fill","red").style("cursor","pointer");
       		}
       		else {
-      			if(this != chosen_node){
+      			if(!chosen_node.includes(this)){
       				// Changement de la couleur de passage du pointeur lorsqu'une région sélectionnée
       				d3.select(this) .style("fill","#ff5a5a").style("cursor","pointer");
       			}
@@ -77,6 +77,7 @@ async function geo_map(w=600, h=500, g) {
         		c.style.stroke = "#000000";
       		}
       		chosen_region.push(d.properties.nom);
+          chosen_node.push(document.querySelector(`.${d.properties.nom.split(' ').join('-').split("'").join('')}`));
       		
       		//Changement titre carte
       		let title_node = document.querySelectorAll('.title');
@@ -95,9 +96,8 @@ async function geo_map(w=600, h=500, g) {
       		
       
       		// Coloration en rouge de la région sélectionnée
-          for (let name of chosen_region){
-            chosen_node = document.querySelector(`.${name.split(' ').join('-').split("'").join('')}`);
-            chosen_node.style.fill = "red";
+          for (let node of chosen_node){
+            node.style.fill = "red";
           }
       		
     
@@ -123,7 +123,7 @@ async function geo_map(w=600, h=500, g) {
     	.on("mouseleave", function(d) {
       		tooltip.style('opacity', 0).style('visibility','hidden');
       		// Gestion de la couleur
-      		if(this != chosen_node){
+      		if(!chosen_node.includes(this)){
          		d3.select(this).style("fill","rgb(104,104,104)");
          	}
          })
