@@ -2,7 +2,7 @@
 
 
 
-async function chart(k = "freq", q = ["ILE-DE-FRANCE","OCCITANIE"],type = "T") {
+async function chart(k = "freq", q = [],type = "T") {
   const margin = ({top: 45, right: 30, bottom: 50, left: 60})
   const height = 350;
   const width = 750;
@@ -16,6 +16,10 @@ async function chart(k = "freq", q = ["ILE-DE-FRANCE","OCCITANIE"],type = "T") {
       .attr("height", 3*height/4);
 
 
+  //Pré-traitement régions étudiées
+  if (q.length == 0){
+    q = await getPromiseValues("region");
+  }
   //Récupération des données à afficher
   let data = await getDataPromise();
   var newdataset = data.filter(d => d.region == q[0]);
@@ -46,7 +50,6 @@ async function chart(k = "freq", q = ["ILE-DE-FRANCE","OCCITANIE"],type = "T") {
   let dataset;
   //Création des lignes
   for (region of q){
-    console.log(region);
     dataset = data.filter(d => d.region == region);
     dataset = dataset.filter(d => d.type == type);
 
