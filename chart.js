@@ -27,14 +27,28 @@ async function chart(k = "freq", q = [],type = "T") {
     //console.log(newdataset);
     dataValue = getValues(newdataset,k);
     rawYear = getValues(data, "year").sort();
-    regionName = "Toutes les régions de France";
+    regionName = "de toutes les régions de France";
+
   }
   else{
     var newdataset = data.filter(d => d.region == q[0]);
     newdataset = newdataset.filter(d => d.type == type);
     dataValue = getValues(newdataset,k);
     rawYear = getValues(data, "year").sort();
-    regionName = await parseRegion(q[0]);
+    if (q.length == 1){
+      let name = await parseRegion(q[0]);
+      regionName = `de la région : ${name}`;
+    }
+    else{
+      let region_names = await parseRegion(q[0]);
+      for (let i=1; i < q.length - 1; i++){
+        let name = await parseRegion(q[i])
+        region_names += ", " + name;
+      }
+      name = await parseRegion(q[q.length - 1]);
+      region_names += " et " + name;
+      regionName = `des régions : ${region_names}`
+    }
   }
 
   //Mise à l'échelle de l'axe des abscisses
@@ -75,7 +89,7 @@ async function chart(k = "freq", q = [],type = "T") {
     .style("text-anchor", "middle")
     .attr("x", (width + margin.left + margin.right)/2)
     .attr("y", margin.top/3)
-    .text(`${keyMap.get(k)} de la région : ${regionName}`);
+    .text(`${keyMap.get(k)} ${regionName}`);
 
   //Création du titre des axes
   svg.append("text")

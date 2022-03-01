@@ -54,14 +54,16 @@ d3.select("#start").on("click", function() {
 
 
 d3.select("#reset").on("click",function () {
+  //Réinitialisation carte
   let map_node = document.querySelector("#carte").querySelector("svg")
-  //console.log(map_node)
   let nodes = map_node.querySelectorAll('path[type="region"]');
-  //console.log(nodes)
       for (let c of nodes){
         c.style.fill = "rgb(104,104,104)";
         c.style.stroke = "#000000";
       }
+  let title_node = map_node.querySelector('.title');
+  title_node.innerHTML = 'Choisissez la région à étudier';
+
   //Mise à jour line chart
   let q_var = [];
   let td_node = document.querySelectorAll('#line_chart');  //récupération du td contenant le line chart

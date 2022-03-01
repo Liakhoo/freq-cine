@@ -81,7 +81,6 @@ async function geo_map(w=600, h=500, g) {
       		
       		//Changement titre carte
       		let title_node = document.querySelectorAll('.title');
-      		//console.log(title_node);
           let nbRegions = chosen_region.length;
           if (nbRegions == 1){
             title_node[0].innerHTML = `La région choisie est : ${chosen_region[0]}`;
