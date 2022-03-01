@@ -15,21 +15,32 @@ async function chart(k = "freq", q = [],type = "T") {
       .attr("width", 3*width/4)
       .attr("height", 3*height/4);
 
+      //Récupération des données à afficher
+  let data = await getDataPromise();
+    
+  d3.schemePaired.push("#F236BB")
+  const color = d3.scaleOrdinal(d3.schemePaired)
 
+  var dataValue;
+  var rawYear;
+  var regionName;
   //Pré-traitement régions étudiées
   if (q.length == 0){
     q = await getPromiseValues("region");
+    var newdataset = data.filter(d => d.region == q[7]); //Île-de-France
+    newdataset = newdataset.filter(d => d.type == type);
+    console.log(newdataset);
+    dataValue = getValues(newdataset,k);
+    rawYear = getValues(data, "year").sort();
+    regionName = "Toutes les régions de France";
   }
-  //Récupération des données à afficher
-  let data = await getDataPromise();
-  var newdataset = data.filter(d => d.region == q[0]);
-  newdataset = newdataset.filter(d => d.type == type);
-  const dataValue = getValues(newdataset,k);
-  const rawYear = getValues(data, "year").sort();
-  let regionName = await parseRegion(q[0]);
-  
-  d3.schemePaired.push("#F236BB")
-  const color = d3.scaleOrdinal(d3.schemePaired)
+  else{
+    var newdataset = data.filter(d => d.region == q[0]);
+    newdataset = newdataset.filter(d => d.type == type);
+    dataValue = getValues(newdataset,k);
+    rawYear = getValues(data, "year").sort();
+    regionName = await parseRegion(q[0]);
+  }
 
   //Mise à l'échelle de l'axe des abscisses
   const x = d3.scaleTime()
@@ -59,7 +70,7 @@ async function chart(k = "freq", q = [],type = "T") {
     .append("path")
     .attr("d", d => line(d))
     .attr("fill", "none")
-    .attr("stroke", d => "blue")
+    .attr("stroke", d => color(region))
   }
 
   //Création du titre du graphique
