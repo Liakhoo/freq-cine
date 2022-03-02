@@ -6,6 +6,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
 
   //Préparation données
   let date = d3.select("#rangeSlider").property("value");
+  let choices = chosen_region[chosen_region.length-1]
 
   let data = await getDataPromise();
   let dataset = filterTaille(data);
@@ -73,8 +74,6 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
 
   const svg = d3.create("svg")
       .attr("viewBox", [0, 0, width+margin.left+margin.right, height+margin.top+margin.bottom])
-      //.attr("width", document.getElementById('scatter').clientWidth)
-      //.attr("height", 3*(height+margin.top+margin.bottom)/2);
 
   const x = d3.scaleLinear()
     .domain([global_xmin, global_xmax])   //On considère le jeu entier de données pour que les axes ne varient pas entre les années.
@@ -134,7 +133,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     .attr("r", d => taille(d["etab"]))
     .attr("fill", d => color(d.region))
     .attr("stroke", "black")
-    .style("opacity",d => isClicked ? (chosen_region.includes(regionMap.get(d.region)) ? 1 : 0.15) : 1)
+    .style("opacity",d => isClicked ? (regionMap.get(d.region) == choices ? 1 : 0.15) : 1)
     .on("mouseover", function(d) {
         if (!isClicked){
           mouseOverScatter(regionMap.get(d.region));
@@ -163,7 +162,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
       .attr("width", d => 2*taille(d["etab"]))
       .attr("fill", d => color(d.region))
       .attr("stroke", "black")
-      .style("opacity",d => isClicked ? (chosen_region.includes(regionMap.get(d.region)) ? 1 : 0.15) : 1)
+      .style("opacity",d => isClicked ? (regionMap.get(d.region) == choices ? 1 : 0.15) : 1)
       .on("mouseover", function(d) {
         if (!isClicked){
           mouseOverScatter(regionMap.get(d.region));
@@ -189,7 +188,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
             return String(x(d[var_x]) - taille(d["etab"])) + "," + String(y(d[var_y]) + taille(d["etab"])) + " " + String(x(d[var_x])) + "," + String(y(d[var_y]) - taille(d["etab"])) + " " + String(x(d[var_x]) + taille(d["etab"])) + "," + String(y(d[var_y]) + taille(d["etab"]));
       })
       .attr("fill", d => color(d.region))
-      .style("opacity",d => isClicked ? (chosen_region.includes(regionMap.get(d.region)) ? 1 : 0.15) : 1)
+      .style("opacity",d => isClicked ? (regionMap.get(d.region) == choices ? 1 : 0.15) : 1)
       //.attr("stroke", "black")
       .on("mouseover", function(d) {
         if (!isClicked){
@@ -342,9 +341,9 @@ async function legend_form() {
   }
 
   function calculateMoy(dataset,dataP, dataM, dataG, key) {
-    let moy_P = d3.max(dataset, d => d[key])/2
-    let moy_M = d3.max(dataset, d => d[key])/2
-    let moy_G = d3.max(dataset, d => d[key])/2
+    let moy_P = 0
+    let moy_M = 0
+    let moy_G = 0
     if (document.querySelector('#petit').checked){
       moy_P = d3.mean(dataP, d => d[key]);
     }
@@ -354,11 +353,19 @@ async function legend_form() {
     if (document.querySelector('#grand').checked){
       moy_G = d3.mean(dataG, d => d[key]);
     }
-    return [moy_P, moy_M, moy_G];
+    //recalcule de la moyenne en enlevant les tailles non sélectionnée
+    var moy_list = [moy_P,moy_M,moy_G]
+    moy_list.sort((a,b)=>a-b)
+    while (moy_list[0]==0 && moy_list!=[]){
+      moy_list.splice(0,1)
+    }
+    let moy_tot = d3.mean(moy_list)
+    return moy_tot;
   }
 
-  let global_lim = [d3.min(calculateMin(data,dataset_P,dataset_M,dataset_G,"etab")),Math.round(d3.mean(calculateMoy(data,dataset_P,dataset_M,dataset_G,"etab"))),d3.max(calculateMax(dataset_P,dataset_M,dataset_G,"etab"))]
-  let lim_list = ["min","moy","max"]
+  
+  let global_lim = [d3.min(calculateMin(data,dataset_P,dataset_M,dataset_G,"etab")),Math.round(calculateMoy(data,dataset_P,dataset_M,dataset_G,"etab")),d3.max(calculateMax(dataset_P,dataset_M,dataset_G,"etab"))]
+  let lim_list = ["Minimum","Moyenne","Maximum"]
 
   //Pour les tailles
   const taille = d3.scaleLinear()
@@ -370,7 +377,7 @@ async function legend_form() {
       .enter()
       .append("circle")
       .attr("cx", margin.left+35)
-      .attr("cy", d => height+20-taille(d))
+      .attr("cy", d => height+15-taille(d))
       .attr("r", d => taille(d))
       .attr("fill","none")
       .attr("stroke", "black")
@@ -380,7 +387,7 @@ async function legend_form() {
       .enter()
       .append("text")
       .attr("x", margin.left+80)
-      .attr("y", (d,i) => height - i*10 + 15)
+      .attr("y", (d,i) => height - i*15 + 20)
       .style("font-size","10px")
       .text((d,i) => lim_list[i] + " : " + String(d))
 

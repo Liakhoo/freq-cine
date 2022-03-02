@@ -13,8 +13,23 @@
 
   <div class="header">
     <h1>Fréquentation et recettes des cinémas en France</h1>
+    <button class="info_button" onclick="afficherDetail()">A propos</button>
   </div>
   <div class="container">
+    <div class="info-popup" id="popupPage">
+    	<div class="popup_container">
+    		<p>
+    			Les données sont tirées du site du <strong>Centre National du Cinéma (CNC)</strong>. Elles rassemblent les statistiques des fréquentations et des recettes des cinémas en France et par région. Les relevés généraux pour une région sont accessibles depuis 1966, cependant la répartition par taille d'établissement n'est réalisée que depuis 2004.
+    		</p>
+    		<p>
+    			Toutes les informations concernant ce projet se trouve dans un notebook Observable dont l'accès est limité afin de le dédier exclusivement à la notation de ce projet.
+    		</p>
+    		<p>
+    			<a href="https://observablehq.com/d/74b63a4617f4244c">Lien vers le notebook</a>
+    		</p>
+        	<button type="button" class="btn_cancel" onclick="fermerPopup()">OK</button>
+        </div>
+    </div>	
     <select id="VarSelect"></select>
     <p>Taille des cinémas : </p>
     <input type="checkbox" id="petit" name="petit" checked/>
@@ -25,8 +40,8 @@
     <label for="grand">Grand</label>
 
     <div id="slider">
-		<input type='range' min='2004' max='2020' step='1' value='2004' id='rangeSlider' /> 
-	  <button type="button" id="start">Lancer la lecture automatique</button>
+	<input type='range' min='2004' max='2020' step='1' value='2004' id='rangeSlider' /> 
+	<button type="button" id="start">Lancer la lecture automatique</button>
     <button type="button" id="stop">Arrêter la lecture automatique</button>
     <button type="button" id="reset">Déselectionner toutes les régions</button>
     <table width="100%">

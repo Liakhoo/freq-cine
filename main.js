@@ -225,3 +225,11 @@ function mouseLeaveScatter() {
         c.style.opacity = 1;
   }
 }
+
+function afficherDetail() {
+  document.getElementById("popupPage").style.display = "block";
+}
+
+function fermerPopup() {
+        document.getElementById("popupPage").style.display = "none";
+      }

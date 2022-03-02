@@ -23,4 +23,34 @@ h1{
   font-family: Helvetica, sans-serif;
   font-style: italic;
   font-weight: bold;
-}  
+}
+
+p{
+  text-align: justify;
+}
+
+.info_button{
+  position : absolute;
+  top: 5%;
+  left : 5%;
+}
+
+.info-popup {
+  display: none;
+  position: absolute;
+  left: 45%;
+  top: 20%;
+  border: 2px solid #666;
+}
+
+.popup_container {
+  max-width: 300px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.btn_cancel{
+  position: absolute;
+  left: 45%;
+  bottom: 2%;
+}
