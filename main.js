@@ -2,7 +2,7 @@
 let url = "https://raw.githubusercontent.com/Lyspa/freq-cine/main/freq-cine.csv";
 let data = [];
 let isClicked = false;
-var chosen_node = ''; // définition de chosen_node pour éviter les erreurs d'exécution
+var chosen_node = []; // définition de chosen_node pour éviter les erreurs d'exécution
 var chosen_region = []; // définition de chosen_region pour éviter les erreurs d'exécution
 
 function getDataPromise() {
@@ -200,10 +200,22 @@ function mouseOverScatter(region) {
   for (let c of nodes){
         c.style.opacity = 0.15;
   }
-  let chosen_nodes = document.querySelectorAll(`.scatter_${region.split(' ').join('-').split("'").join('')}`);
-  //console.log(chosen_nodes);
-  for (let c of chosen_nodes){
-        c.style.opacity = 1;
+
+  if (!isClicked){
+    let chosen_nodes = document.querySelectorAll(`.scatter_${region.split(' ').join('-').split("'").join('')}`);
+    //console.log(chosen_nodes);
+    for (let c of chosen_nodes){
+          c.style.opacity = 1;
+    }
+  }
+  else{
+    for (let region of chosen_region){
+      let chosen_nodes = document.querySelectorAll(`.scatter_${region.split(' ').join('-').split("'").join('')}`);
+      //console.log(chosen_nodes);
+      for (let c of chosen_nodes){
+            c.style.opacity = 1;
+      }
+    }
   }
 }
 

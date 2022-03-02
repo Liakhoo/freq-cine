@@ -60,15 +60,14 @@ async function geo_map(w=600, h=500, g) {
       			d3.select(this).style("fill","red").style("cursor","pointer");
       		}
       		else {
-      			if(this != chosen_node){
+      			if(!chosen_node.includes(this)){
       				// Changement de la couleur de passage du pointeur lorsqu'une région sélectionnée
       				d3.select(this) .style("fill","#ff5a5a").style("cursor","pointer");
       			}
       		}
       	})
     	.on("click", (d,i) => {
-      		//Modification du scatterplot
-      		mouseOverScatter(d.properties.nom);
+        if(!chosen_region.includes(d.properties.nom)){
       		isClicked = true;
       		
       		//Modification de la carte, remise en gris des régions non sélectionnées
@@ -77,33 +76,54 @@ async function geo_map(w=600, h=500, g) {
         		c.style.fill = "rgb(104,104,104)";
         		c.style.stroke = "#000000";
       		}
-      		chosen_node = document.querySelector(`.${d.properties.nom.split(' ').join('-').split("'").join('')}`);
       		chosen_region.push(d.properties.nom);
+          chosen_node.push(document.querySelector(`.${d.properties.nom.split(' ').join('-').split("'").join('')}`));
       		
       		//Changement titre carte
       		let title_node = document.querySelectorAll('.title');
-      		//console.log(title_node);
-      		title_node[0].innerHTML = `La région choisie est : ${chosen_region[0]}`;
+          let nbRegions = chosen_region.length;
+          if (nbRegions == 1){
+            title_node[0].innerHTML = `La région choisie est : ${chosen_region[0]}`;
+          }
+          else{
+            region_names = chosen_region[0];
+            for (let i=1; i < nbRegions - 1; i++){
+              region_names += ", " + chosen_region[i];
+            }
+            region_names += " et " + chosen_region[nbRegions - 1];
+            title_node[0].innerHTML = `Les régions choisies sont : ${region_names}`;
+          }
+      		
       
       		// Coloration en rouge de la région sélectionnée
-      		chosen_node.style.fill = "red";
+          for (let node of chosen_node){
+            node.style.fill = "red";
+          }
+      		
     
       		// Changement de la line chart
+          let variable_node = document.getElementById('VarSelect');
+          let variable = variable_node.value;
       		let q_var = [];
           for (let element of chosen_region){
             q_var.push(regionMap.get(element));
           }
       		let td_node = document.querySelectorAll('#line_chart');  //récupération du td contenant le line chart
       		let svg_node = td_node[0].querySelectorAll('svg'); //recuperation du noeud svg du line chart
+          console.log(q_var);
           let chart_node = chart(getKey(variable),q_var,"T"); // récupération noeud nouveau line chart
           chart_node.then((result) => {
             td_node[0].replaceChild(result, svg_node[0]);
           });
-      	})
+
+          //Modification du scatterplot
+          mouseOverScatter(d.properties.nom);
+        }
+      })
     	.on("mouseleave", function(d) {
       		tooltip.style('opacity', 0).style('visibility','hidden');
       		// Gestion de la couleur
-      		if(this != chosen_node){
+      		if(!chosen_node.includes(this)){
          		d3.select(this).style("fill","rgb(104,104,104)");
          	}
          })
