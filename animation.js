@@ -20,9 +20,9 @@ console.log(variable);
 
 
 //Evenements
-checkbox_P.addEventListener('change', () => {modify_scatter();});
-checkbox_M.addEventListener('change', () => {modify_scatter();});
-checkbox_G.addEventListener('change', () => {modify_scatter();});
+checkbox_P.addEventListener('change', () => {modify_scatter();modify_legend();});
+checkbox_M.addEventListener('change', () => {modify_scatter();modify_legend();});
+checkbox_G.addEventListener('change', () => {modify_scatter();modify_legend();});
 
 
 
@@ -101,6 +101,16 @@ function modify_scatter() {
     td_node[0].replaceChild(result, svg_node[0]); // mise à jour du scatterplot
   });
 };
+
+function modify_legend() {
+  let td_node = document.querySelectorAll('#legend_form');  //récupération du div contenant le scatterplot
+  let svg_node = td_node[0].querySelectorAll('svg'); //recuperation du noeud svg du scatterplot
+
+  let legend_node = legend_form();
+  legend_node.then((result) => {
+    td_node[0].replaceChild(result, svg_node[0]); // mise à jour du scatterplot
+  });
+}
 
 
 modify_linechart = () => {

@@ -206,16 +206,16 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
 
     //Création du titre du graphique
   svg.append("text")
-    .style("font-size","8px")
+    .style("font-size","15px")
     .style("text-anchor", "middle")
     .attr("x", (width + margin.left + margin.right)/2)
-    .attr("y", margin.top)
+    .attr("y", margin.top-15)
     .text(`Indice de fréquentation en fonction ${getTitle(var_x)} `);
 
   //Creation du titre de l'axe des abscisses
   svg.append("text")
     .attr("class", "x label")
-    .style("font-size","6px")
+    .style("font-size","10px")
     .style("text-anchor", "middle")
     .attr("x", (width + margin.left + margin.right)/2)
     .attr("y", height + margin.bottom + 5)
@@ -224,10 +224,10 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
   //Creation du titre de l'axe des ordonnees
   svg.append("text")
     .attr("class", "y label")
-    .style("font-size","6px")
+    .style("font-size","10px")
     .attr("text-anchor", "middle")
     .attr("x", 0)
-    .attr("y", 0)
+    .attr("y", -5)
     .attr("transform", `rotate(-90) translate(${-(height + margin.bottom + margin.top)/2 +10},${margin.left-20})`)
     .text("Indice de fréquentation");
 
@@ -239,7 +239,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
   // set the dimensions and margins of the graph
   var margin = {top: 30, right: 10, bottom: 5, left: 5},
       width =260 - margin.left - margin.right,
-      height = 200 - margin.top - margin.bottom;
+      height = 150 - margin.top - margin.bottom;
 
   const svg = d3.create("svg")
       .attr("viewBox", [0, 0, width+margin.left+margin.right, height+margin.top+margin.bottom])
@@ -282,9 +282,111 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
   return svg.node();
 }
 
+async function legend_form() {
+  //dimension et marges de la légende
+  var margin = {top: 20, right: 5, bottom: 5, left: 5},
+      width =260 - margin.left - margin.right,
+      height = 60 - margin.top - margin.bottom;
+
+  const svg = d3.create("svg")
+      .attr("viewBox", [0, 0, width+margin.left+margin.right, height+margin.top+margin.bottom])
+
+  //Préparation données
+  let date = d3.select("#rangeSlider").property("value");
+  let choices = chosen_region[chosen_region.length-1]
+
+  let data = await getDataPromise();
+  let dataset = filterTaille(data);
+  let newdataset = dataset.filter(d => d.year.toDateString() === parseDate(date).toDateString());
+
+  let dataset_P = dataset.filter(d => d.type === "P");
+  let dataset_M = dataset.filter(d => d.type === "M");
+  let dataset_G = dataset.filter(d => d.type === "G");
+  
+  let newdataset_P = newdataset.filter(d => d.type === "P");
+  let newdataset_M = newdataset.filter(d => d.type === "M");
+  let newdataset_G = newdataset.filter(d => d.type === "G");
+
+  //Fonction pour avoir min, max et médian
+  function calculateMin(dataset, dataP, dataM, dataG, key) {
+    let min_P = d3.max(dataset, d => d[key])
+    let min_M = d3.max(dataset, d => d[key])
+    let min_G = d3.max(dataset, d => d[key])
+    if (document.querySelector('#petit').checked){
+      min_P = d3.min(dataP, d => d[key]);
+    }
+    if (document.querySelector('#moyen').checked){
+      min_M = d3.min(dataM, d => d[key]);
+    }
+    if (document.querySelector('#grand').checked){
+      min_G = d3.min(dataG, d => d[key]);
+    }
+    return [min_P,min_M,min_G];
+  }
+
+  function calculateMax(dataP, dataM, dataG, key) {
+    let max_P = 0;
+    let max_M = 0;
+    let max_G = 0;
+    if (document.querySelector('#petit').checked){
+      max_P = d3.max(dataP, d => d[key]);
+    }
+    if (document.querySelector('#moyen').checked){
+      max_M = d3.max(dataM, d => d[key]);
+    }
+    if (document.querySelector('#grand').checked){
+      max_G = d3.max(dataG, d => d[key]);
+    }
+    return [max_P, max_M, max_G];
+  }
+
+  function calculateMoy(dataset,dataP, dataM, dataG, key) {
+    let moy_P = d3.max(dataset, d => d[key])/2
+    let moy_M = d3.max(dataset, d => d[key])/2
+    let moy_G = d3.max(dataset, d => d[key])/2
+    if (document.querySelector('#petit').checked){
+      moy_P = d3.mean(dataP, d => d[key]);
+    }
+    if (document.querySelector('#moyen').checked){
+      moy_M = d3.mean(dataM, d => d[key]);
+    }
+    if (document.querySelector('#grand').checked){
+      moy_G = d3.mean(dataG, d => d[key]);
+    }
+    return [moy_P, moy_M, moy_G];
+  }
+
+  let global_lim = [d3.min(calculateMin(data,dataset_P,dataset_M,dataset_G,"etab")),Math.round(d3.mean(calculateMoy(data,dataset_P,dataset_M,dataset_G,"etab"))),d3.max(calculateMax(dataset_P,dataset_M,dataset_G,"etab"))]
+  let lim_list = ["min","moy","max"]
+
+  //Pour les tailles
+  const taille = d3.scaleLinear()
+      .domain([global_lim[0], global_lim[2]])
+      .range([1, 10])
+
+  //échelle globale  
+    svg.selectAll("circle").data(global_lim)
+      .enter()
+      .append("circle")
+      .attr("cx", margin.left+35)
+      .attr("cy", d => height+20-taille(d))
+      .attr("r", d => taille(d))
+      .attr("fill","none")
+      .attr("stroke", "black")
+      .style("opacity","1")
+
+    svg.selectAll("text").data(global_lim)
+      .enter()
+      .append("text")
+      .attr("x", margin.left+80)
+      .attr("y", (d,i) => height - i*10 + 15)
+      .style("font-size","10px")
+      .text((d,i) => lim_list[i] + " : " + String(d))
+
+  return svg.node();
+}
 
 
-console.log(getKey(variable));
 let scatter_node = scatterplot(getKey(variable)); // normalement scatterplot(filteredData, getKey(variable))
 
 scatter_node.then((result) => {
@@ -296,4 +398,10 @@ let legend_node = legend_scatterplot();
 
 legend_node.then((result) => {
   document.getElementById("legend").appendChild(result);
+});
+
+let legend_form_node = legend_form();
+
+legend_form_node.then((result) => {
+  document.getElementById("legend_form").appendChild(result);
 });

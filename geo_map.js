@@ -10,7 +10,7 @@ async function geo_map(w=600, h=500, g) {
 
 	let projection = d3.geoConicConformal()
     	.center([2.454071, 46.279229])
-    	.scale(2600)
+    	.scale(1500)
     	.translate([width / 2, height / 2]);
 
   let path = d3.geoPath(projection);
@@ -114,7 +114,7 @@ async function geo_map(w=600, h=500, g) {
     	.style("font-size","20px")
        	.style("text-anchor", "middle")
        	.attr("x", (w + margin.left + margin.right)/2)
-       	.attr("y", h-margin.bottom)
+       	.attr("y", h-5*margin.bottom)
       	.text('Choisissez la région à étudier')
   
 
