@@ -3,7 +3,7 @@
 <head>
   <title>Fréquentation et recettes des cinémas en France</title>
   <link rel="stylesheet" href="dataviz_freqcine_style.css"></link>
-  <link rel="shortcut icon" href="#">
+  <link rel="shortcut icon" href="clapet_cine.png">
   <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
 </head>
 <body>
@@ -13,7 +13,7 @@
 
   <div class="header">
     <h1>Fréquentation et recettes des cinémas en France</h1>
-    <button class="info_button" onclick="afficherDetail()">A propos</button>
+    <button class="button" id="info_button" onclick="afficherDetail()">A propos</button>
   </div>
   <div class="container">
     <div class="info-popup" id="popupPage">
@@ -27,23 +27,36 @@
     		<p>
     			<a href="https://observablehq.com/d/74b63a4617f4244c">Lien vers le notebook</a>
     		</p>
-        	<button type="button" class="btn_cancel" onclick="fermerPopup()">OK</button>
+        	<button type="button" class="button" id="btn_cancel" onclick="fermerPopup()">OK</button>
         </div>
-    </div>	
-    <select id="VarSelect"></select>
-    <p>Taille des cinémas : </p>
-    <input type="checkbox" id="petit" name="petit" checked/>
-    <label for="petit">Petit</label>
-    <input type="checkbox" id="moyen" name="moyen" checked/>
-    <label for="moyen">Moyen</label>
-    <input type="checkbox" id="grand" name="grand" checked/>
-    <label for="grand">Grand</label>
-
+    </div>
+    <div class="VarSelect_box">
+	    <label for="VarSelect">Choix de la variables :</label>	
+	    <select id="VarSelect" name="VarSelect"></select>
+	</div>
+    <div>
+	    <div class="checkbox_label">Taille des cinémas : </div>
+	    <div class="checkbox_select">
+	    	<input type="checkbox" id="petit" name="petit" checked/>
+	    	<label for="petit" class="boxlabel">Petit</label>
+	    	<input type="checkbox" id="moyen" name="moyen" checked/>
+	    	<label for="moyen" class="boxlabel">Moyen</label>
+	    	<input type="checkbox" id="grand" name="grand" checked/>
+	    	<label for="grand" class="boxlabel">Grand</label>
+		</div>
+	</div>
     <div id="slider">
-	<input type='range' min='2004' max='2020' step='1' value='2004' id='rangeSlider' /> 
-	<button type="button" id="start">Lancer la lecture automatique</button>
-    <button type="button" id="stop">Arrêter la lecture automatique</button>
-    <button type="button" id="reset">Déselectionner toutes les régions</button>
+    	<div class="field">
+    		<div class="value left">2004</div>
+			<input type='range' min='2004' max='2020' step='1' value='2004' id='rangeSlider'/>
+			<div class="value right">2020</div>
+    	</div>
+    	<div class="buttons">
+    		<input type="image" id="start" src="play.png"/>
+	    	<input type="image" id="stop" src="stop.png"/>
+	    	<button type="button" id="reset" class="button">Reset</button>
+    	</div>
+    </div>
     <table width="100%">
      	<tr>
       		<td width="50%" rowspan="3">
@@ -68,7 +81,6 @@
      		</td>
      	</tr>
     </table>
-	</div>
   </div>
 
   
