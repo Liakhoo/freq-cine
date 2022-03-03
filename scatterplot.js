@@ -6,7 +6,6 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
 
   //Préparation données
   let date = d3.select("#rangeSlider").property("value");
-  let choices = chosen_region[chosen_region.length-1]
 
   let data = await getDataPromise();
   let dataset = filterTaille(data);
@@ -133,7 +132,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     .attr("r", d => taille(d["etab"]))
     .attr("fill", d => color(d.region))
     .attr("stroke", "black")
-    .style("opacity",d => isClicked ? (regionMap.get(d.region) == choices ? 1 : 0.15) : 1)
+    .style("opacity",d => isClicked ? (chosen_region.includes(regionMap.get(d.region)) ? 1 : 0.15) : 1)
     .on("mouseover", function(d) {
         if (!isClicked){
           mouseOverScatter(regionMap.get(d.region));
@@ -162,7 +161,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
       .attr("width", d => 2*taille(d["etab"]))
       .attr("fill", d => color(d.region))
       .attr("stroke", "black")
-      .style("opacity",d => isClicked ? (regionMap.get(d.region) == choices ? 1 : 0.15) : 1)
+      .style("opacity",d => isClicked ? (chosen_region.includes(regionMap.get(d.region)) ? 1 : 0.15) : 1)
       .on("mouseover", function(d) {
         if (!isClicked){
           mouseOverScatter(regionMap.get(d.region));
@@ -188,7 +187,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
             return String(x(d[var_x]) - taille(d["etab"])) + "," + String(y(d[var_y]) + taille(d["etab"])) + " " + String(x(d[var_x])) + "," + String(y(d[var_y]) - taille(d["etab"])) + " " + String(x(d[var_x]) + taille(d["etab"])) + "," + String(y(d[var_y]) + taille(d["etab"]));
       })
       .attr("fill", d => color(d.region))
-      .style("opacity",d => isClicked ? (regionMap.get(d.region) == choices ? 1 : 0.15) : 1)
+      .style("opacity",d => isClicked ? (chosen_region.includes(regionMap.get(d.region)) ? 1 : 0.15) : 1)
       //.attr("stroke", "black")
       .on("mouseover", function(d) {
         if (!isClicked){
