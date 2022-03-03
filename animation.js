@@ -3,8 +3,7 @@ let checkbox_P = document.getElementById('petit');
 let checkbox_M = document.getElementById('moyen');
 let checkbox_G = document.getElementById('grand');
 
-let myTimer;
-
+var myTimer;
 
 // Variable selector
 let options = ["Nombre d'entrées","Nombre d'établissements","Nombre d'écrans","Nombre de fauteuils","Nombre de séances","Recette","Recette moyenne par entrée","Taux moyen d'occupation des fauteuils"].map(d => `<option value="${d}">${d}</option>`);
@@ -35,25 +34,27 @@ d3.select("#rangeSlider").on("input", function() {
   modify_scatter();
 });
 
-
 d3.select("#start").on("click", function() {
   clearInterval (myTimer);
   myTimer = setInterval (function() {
       var b= d3.select("#rangeSlider");
-      console.log(b);
       var t = (+b.property("value") + 1) % (+b.property("max") + 1);
-      console.log(t)
       if (t == 0) {
         t = +b.property("min");
       }
       b.property("value", t);
       modify_scatter();
     }, 1000);
-  console.log(myTimer);
+});
+
+d3.select("#stop").on("click", function() {
+  clearInterval (myTimer);
 });
 
 
+
 d3.select("#reset").on("click",function () {
+  console.log(test);
   let variable_node = document.getElementById('VarSelect');
   let variable = variable_node.value;
 
@@ -83,13 +84,6 @@ d3.select("#reset").on("click",function () {
   isClicked = false;
   chosen_node = [];
   chosen_region = [];
-});
-
-
-//Partie stop non fonctionnelle encore !
-d3.select("#stop").on("click", function(myTimer) {
-  console.log(myTimer);
-  clearInterval (myTimer);
 });
 
 

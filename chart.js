@@ -108,7 +108,7 @@ async function chart(k = "freq", q = [],type = "T") {
     .attr("x", margin.top)
     .attr("y", margin.left-55)
     .attr("transform", `rotate(-90) translate(${-(height + margin.bottom + margin.top)/2 +10},10)`)
-    .text(`${keyMap.get(k)} (${unitMap.get(k)})`);
+    .text(`${keyMap.get(k)} ${unitMap.get(k)}`);
 
 
   //Création des axes et affichage
