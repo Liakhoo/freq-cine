@@ -81,6 +81,7 @@ async function chart(k = "freq", q = [],type = "T") {
     .append("path")
     .attr("d", d => line(d))
     .attr("fill", "none")
+    .attr("stroke-width", d => (isClicked && region == q[q.length-1]) ? "3" : "1")
     .attr("stroke", d => color(region))
   }
 
