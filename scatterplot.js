@@ -144,7 +144,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
         }
       })
     .append("title")
-    .text(d => "Région : "+ regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("P") + "\nNombre d'établissements : " + d.etab + "\n\n" + getTitle(variable) + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y])
+    .text(d => "Région : "+ regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("P") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y])
       
   }
   
@@ -173,7 +173,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
         }
       })
       .append("title")
-      .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("M") + "\nNombre d'établissements : " + d.etab + "\n\n" + getTitle(variable) + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y])
+      .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("M") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y])
   }
 
   //Triangles
@@ -200,7 +200,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
         }
       })
       .append("title")
-      .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("G") + "\nNombre d'établissements : " + d.etab + "\n\n" + getTitle(variable) + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y])
+      .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("G") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y])
   }
 
     //Création du titre du graphique
