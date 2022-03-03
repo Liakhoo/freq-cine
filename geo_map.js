@@ -44,7 +44,7 @@ async function geo_map(w=600, h=500, g) {
     	.attr('type','region')
     	.on("mouseover", function(d) {
           var mouse = d3.mouse(this);
-          console.log(mouse);
+          //console.log(mouse);
       		// Création tooltip
           //tooltip.attr("transform", "translate("+ (mouse[0]-10) + "," + (mouse[1] - 10) + ")"); 
       		tooltip.style('opacity', 1).text(d.properties.nom).style('visibility','visible');

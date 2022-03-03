@@ -24,7 +24,7 @@ async function chart(k = "freq", q = [],type = "T") {
     q = await getPromiseValues("region");
     //var newdataset = data.filter(d => d.region == q[7]); //Île-de-France
     var newdataset = data.filter(d => d.type == type);
-    newdataset = data.filter(d => d[k] != 0);
+    newdataset = newdataset.filter(d => d[k] != 0);
     dataValue = getValues(newdataset,k);
     rawYear = getValues(newdataset, "year").sort();
     regionName = "de toutes les régions de France";
@@ -33,7 +33,7 @@ async function chart(k = "freq", q = [],type = "T") {
   else{
     var newdataset = data.filter(d => q.includes(d.region));
     newdataset = newdataset.filter(d => d.type == type);
-    newdataset = data.filter(d => d[k] != 0);
+    newdataset = newdataset.filter(d => d[k] != 0);
     dataValue = getValues(newdataset,k);
     rawYear = getValues(newdataset, "year").sort();
     if (q.length == 1){
