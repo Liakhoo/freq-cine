@@ -187,3 +187,16 @@ input[type="checkbox"]:checked:after {
   font-size: 14px;
 }
 .button:hover {background-color:#2B2B2B}
+
+.tooltip{
+  position: absolute;
+  text-align: center;
+  font-size: 10px;
+  background-color: #fff;
+  border: 1px solid #5b5b5b;
+  border-radius: 8px;
+  color: #5b5b5b;
+  padding: 4px;
+  left: 80%;
+  top: 440px;
+}

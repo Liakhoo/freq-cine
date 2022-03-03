@@ -54,7 +54,6 @@ d3.select("#stop").on("click", function() {
 
 
 d3.select("#reset").on("click",function () {
-  console.log(test);
   let variable_node = document.getElementById('VarSelect');
   let variable = variable_node.value;
 

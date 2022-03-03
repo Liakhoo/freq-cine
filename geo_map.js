@@ -26,19 +26,11 @@ async function geo_map(w=600, h=500, g) {
   let rawRegion = await getPromiseValues("region");
   let regionMap = buildMap(regions, rawRegion);
 
- 	var tooltip = d3.select('body')
+ 	var tooltip = d3.select("#carte")
     	.append('div')
-        .attr('class','tooltip')
-        .attr('style', 'position: absolute; opacity: 0;  text-align: center;')
-        .style('width','100px')
-        .style('height','70px') 
-        .style('padding', '2px')  
-        .style('background', '#FFFFE0')
-        .style('border', '1px')
+      .attr('class','tooltip')
+      .style('opacity',0)
   	
-  	var tooltipStats = tooltip.append('div')
-        .attr('class', 'stats');
-
     // world map
   	svg.append("g").selectAll("path")
     	.data(france.features)
@@ -50,10 +42,11 @@ async function geo_map(w=600, h=500, g) {
     	.style('stroke','black')
     	.attr('class', d => d.properties.nom.split(' ').join('-').split("'").join('')) //ajuster nom pour enlever espace et apostrophe qui empêche bon fonctionnement du code
     	.attr('type','region')
-    	.on("mouseover", function(e,d) {
-      		// Création tooltip
-      		//tooltipStats.html('<p> Please show up </p>'); 
-      		//tooltip.style('opacity', 1).text(d.properties.nom).attr('x', (d3.pointer(e,this)[0]-10)+"px").attr('y',d3.pointer(e,this)[1]+"px").style('visibility','visible');
+    	.on("mouseover", function(d) {
+          var mouse = d3.mouse(this)
+          console.log(mouse)
+      		// Création tooltip 
+      		tooltip.style('opacity', 1).text(d.properties.nom).style('visibility','visible');
       		
       		// Gestion couleur
       		if (!isClicked){

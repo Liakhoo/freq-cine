@@ -84,13 +84,13 @@ async function chart(k = "freq", q = [],type = "T") {
   }
 
   //Création du titre du graphique
-  svg.append("text")
+  /*svg.append("text")
     .attr("class", "titlebis")
     .style("font-size","20px")
     .style("text-anchor", "middle")
     .attr("x", (width + margin.left + margin.right)/2)
     .attr("y", margin.top/3)
-    .text(`${keyMap.get(k)} ${regionName}`);
+    .text(`${keyMap.get(k)} ${regionName}`);*/
 
   //Création du titre des axes
   svg.append("text")
