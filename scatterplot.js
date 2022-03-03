@@ -218,7 +218,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     .style("text-anchor", "middle")
     .attr("x", (width + margin.left + margin.right)/2)
     .attr("y", height + margin.bottom + 5)
-    .text(`${keyMap.get(var_x)} (${unitMap.get(var_x)})`);
+    .text(`${keyMap.get(var_x)} ${unitMap.get(var_x)}`);
 
   //Creation du titre de l'axe des ordonnees
   svg.append("text")

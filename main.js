@@ -13,10 +13,10 @@ function getDataPromise() {
 		    res.type = d["type"];
 		    res.etab = +d["nb_etab"];
 		    res.ecrans = +d["nb_ecrans"];
-		    res.fauteuils = +d["nb_fauteuils"];
-		    res.seances = +d["nb_seances"]*1/1;
+		    res.fauteuils = Math.round(+d["nb_fauteuils"]*100)/100000; //en milliers
+		    res.seances = Math.round(+d["nb_seances"]*100)/100000; //en milliers
 		    res.entrees = Math.round(+d["nb_entrees"]/10000)/100;  // en millions
-		    res.recette = Math.round(+d["recette"]/1000)/100; // en millions
+		    res.recette = Math.round(+d["recette"]/10000)/100; // en millions
 		    res.rme = Math.round(+d["rme"]*100)/100;
 		    res.freq = Math.round(+d["indice_freq"]*100)/100;
 		    res.tmof = Math.round(+d["tmof"]*100)/100;
@@ -62,7 +62,7 @@ rawYear.then((result) => {
 const keys = ["etab","ecrans","fauteuils","seances","entrees","recette","rme","freq","tmof"];
 const names = ["Établissements","Écrans","Fauteuils","Séances","Entrées","Recette","Recette moyenne par entrée","Indice de fréquentation","Taux moyen d'occupation des fauteuils"];
 const keyMap = buildMap(keys,names);
-const unit = ["","","","milliers","millions","M€","€","","%"];
+const unit = ["","","(en milliers)","(en milliers)","(en millions)","(en millions d'€)","(en €)","","(en %)"];
 const unitMap = buildMap(keys,unit);
 
 
