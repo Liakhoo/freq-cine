@@ -140,7 +140,7 @@ function getTitle(expr) {
     case "rme":
       return "de la recette moyenne par entrée (RME)";
     case "entrees":
-      return "du nombre d'entrees";
+      return "du nombre d'entrées";
     case "seances":
       return "du nombre de séances";
     case "etab":
