@@ -43,9 +43,10 @@ async function geo_map(w=600, h=500, g) {
     	.attr('class', d => d.properties.nom.split(' ').join('-').split("'").join('')) //ajuster nom pour enlever espace et apostrophe qui empêche bon fonctionnement du code
     	.attr('type','region')
     	.on("mouseover", function(d) {
-          var mouse = d3.mouse(this)
-          console.log(mouse)
-      		// Création tooltip 
+          var mouse = d3.mouse(this);
+          console.log(mouse);
+      		// Création tooltip
+          //tooltip.attr("transform", "translate("+ (mouse[0]-10) + "," + (mouse[1] - 10) + ")"); 
       		tooltip.style('opacity', 1).text(d.properties.nom).style('visibility','visible');
       		
       		// Gestion couleur

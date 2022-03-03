@@ -22,20 +22,20 @@ async function chart(k = "freq", q = [],type = "T") {
   //Pré-traitement régions étudiées
   if (q.length == 0){
     q = await getPromiseValues("region");
-    var newdataset = data.filter(d => d.region == q[7]); //Île-de-France
-    newdataset = newdataset.filter(d => d.type == type);
-    //console.log(newdataset);
+    //var newdataset = data.filter(d => d.region == q[7]); //Île-de-France
+    var newdataset = data.filter(d => d.type == type);
+    newdataset = data.filter(d => d[k] != 0);
     dataValue = getValues(newdataset,k);
-    rawYear = getValues(data, "year").sort();
+    rawYear = getValues(newdataset, "year").sort();
     regionName = "de toutes les régions de France";
 
   }
   else{
-    //console.log(q)
-    var newdataset = data.filter(d => d.region == q[0]);
+    var newdataset = data.filter(d => q.includes(d.region));
     newdataset = newdataset.filter(d => d.type == type);
+    newdataset = data.filter(d => d[k] != 0);
     dataValue = getValues(newdataset,k);
-    rawYear = getValues(data, "year").sort();
+    rawYear = getValues(newdataset, "year").sort();
     if (q.length == 1){
       let name = await parseRegion(q[0]);
       regionName = `de la région : ${name}`;
@@ -73,6 +73,7 @@ async function chart(k = "freq", q = [],type = "T") {
   for (region of q){
     dataset = data.filter(d => d.region == region);
     dataset = dataset.filter(d => d.type == type);
+    dataset = dataset.filter(d => d[k] != 0);
 
     svg.append("g").attr("transform", `translate(${margin.left}, 0)`).selectAll("path")
     .data([dataset])
