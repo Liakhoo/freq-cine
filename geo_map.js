@@ -1,5 +1,6 @@
+//Creation carte
 async function geo_map(w=600, h=500, g) {
-	// initialisation du tooltip  
+	// initialisation svg
 	const svg = g || d3.create("svg")
       .attr("viewBox", [0, 0, w, h])
 
@@ -14,9 +15,6 @@ async function geo_map(w=600, h=500, g) {
     	.translate([width / 2, height / 2]);
 
   let path = d3.geoPath(projection);
-  //var isClicked = false
- 	//var chosen_node = '' // définition de chosen_node pour éviter les erreurs d'exécution
- 	//var chosen_region = '' // définition de chosen_region pour éviter les erreurs d'exécution
 
   //Contenu de parseRegionInverse
   let france = await getFrancePromise();
@@ -26,12 +24,13 @@ async function geo_map(w=600, h=500, g) {
   let rawRegion = await getPromiseValues("region");
   let regionMap = buildMap(regions, rawRegion);
 
+  //initialisation du tooltip
  	var tooltip = d3.select("#carte")
     	.append('div')
       .attr('class','tooltip')
       .style('opacity',0)
   	
-    // world map
+    //Carte de la France
   	svg.append("g").selectAll("path")
     	.data(france.features)
     	.enter()
@@ -80,7 +79,7 @@ async function geo_map(w=600, h=500, g) {
           }
       		
     
-      		// Changement de la line chart
+      		// Modification du line chart
           let variable_node = document.getElementById('VarSelect');
           let variable = variable_node.value;
       		let q_var = [];
@@ -105,17 +104,7 @@ async function geo_map(w=600, h=500, g) {
       		if(!chosen_node.includes(this)){
          		d3.select(this).style("fill","rgb(104,104,104)");
          	}
-         })
-
-
-    /*svg.append("text")
-    	.attr('class','title')
-    	.style("font-size","20px")
-       	.style("text-anchor", "middle")
-       	.attr("x", (w + margin.left + margin.right)/2)
-       	.attr("y", h-5*margin.bottom)
-      	.text('Choisissez la région à étudier')*/
-  
+         })  
 
   return svg.node();
 }
@@ -123,7 +112,7 @@ async function geo_map(w=600, h=500, g) {
 
 
 
-
+//Affichage carte
 let map_node = geo_map();
 
 map_node.then((result) => {

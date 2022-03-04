@@ -50,19 +50,19 @@ function getFrancePromise() {
 
 
 //Détermination des bornes du slider
-rawYear.then((result) => {
+/*rawYear.then((result) => {
 	let minYear = d3.min(result);
 	document.getElementById("rangeSlider").min = d3.min(result);
 	document.getElementById("rangeSlider").max = d3.max(result);
 	document.getElementById("rangeSlider").value = d3.min(result);
-  });
+  });*/
 
 
 //importation données utiles
 const keys = ["etab","ecrans","fauteuils","seances","entrees","recette","rme","freq","tmof"];
 const names = ["Établissements","Écrans","Fauteuils","Séances","Entrées","Recette","Recette moyenne par entrée","Indice de fréquentation","Taux moyen d'occupation des fauteuils"];
 const keyMap = buildMap(keys,names);
-const unit = ["","","(en milliers)","(en milliers)","(en millions)","(en millions d'€)","(en €)","","(en %)"];
+const unit = ["",""," milliers"," milliers"," millions"," millions d'€"," €",""," %"];
 const unitMap = buildMap(keys,unit);
 
 
@@ -140,17 +140,17 @@ function getTitle(expr) {
     case "rme":
       return "de la recette moyenne par entrée (RME)";
     case "entrees":
-      return "du nombre d'entrees";
+      return "du nombre d'entrées";
     case "seances":
       return "du nombre de séances";
     case "etab":
       return "du nombre d'établissements";
-    case "Nombre d'écrans":
-      return "ecrans";
-    case "Nombre de fauteuils":
-      return "fauteuils";
-    case "Taux moyen d'occupation des fauteuils":
-      return "tmof";
+    case "ecrans":
+      return "du nombre d'écrans";
+    case "fauteuils":
+      return "du nombre de fauteuils";
+    case "tmof":
+      return "du temps moyen d'occupation des fauteuils";
     default:
       return "";
   }

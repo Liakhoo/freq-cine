@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <title>Fréquentation et recettes des cinémas en France</title>
+  <title>Fréquentation cinémas</title>
   <link rel="stylesheet" href="dataviz_freqcine_style.css"></link>
-  <link rel="shortcut icon" href="clapet_cine.png">
+  <link rel="shortcut icon" href="images/clapet_cine.png">
   <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
 </head>
 <body>
@@ -19,8 +19,16 @@
     <div class="info-popup" id="popupPage">
     	<div class="popup_container">
     		<p>
-    			Les données sont tirées du site du <strong>Centre National du Cinéma (CNC)</strong>. Elles rassemblent les statistiques des fréquentations et des recettes des cinémas en France et par région. Les relevés généraux pour une région sont accessibles depuis 1966, cependant la répartition par taille d'établissement n'est réalisée que depuis 2004.
+    			Les données sont tirées du site du <strong>Centre National du Cinéma et de l'image animée (CNC)</strong>. Elles rassemblent les statistiques des fréquentations et des recettes des cinémas en France et par région. Les relevés généraux pour une région sont accessibles depuis 1966 (1992 pour le nombre d'établissements et de séances), cependant la répartition par type d'établissement n'est réalisée que depuis 2004.
     		</p>
+        <p>
+          Précisions sur les tailles de cinémas :
+          <ul>
+            <li>Petit : < 80 000 entrées</li>
+            <li>Moyen : Entre 80 000 entrées et 450 000 entrées</li>
+            <li>Grand : > 450 000 entrées</li>
+          </ul>
+        </p>
     		<p>
     			Toutes les informations concernant ce projet se trouve dans un notebook Observable dont l'accès est limité afin de le dédier exclusivement à la notation de ce projet.
     		</p>
@@ -45,44 +53,37 @@
 	    	<label for="grand" class="boxlabel">Grand</label>
 		</div>
 	</div>
-    <div id="slider">
-    	<div class="field">
-    		<div class="value left">2004</div>
-			<input type='range' min='2004' max='2020' step='1' value='2004' id='rangeSlider'/>
-			<div class="value right">2020</div>
-    	</div>
-    	<div class="buttons">
-    		<input type="image" id="start" src="play.png"/>
-	    	<input type="image" id="stop" src="stop.png"/>
-    	</div>
-    </div>
     <table width="100%">
-    	<thead>
-	    	<td colspan="3">
-	    		<div  id="title"></div>
-	    	</td>
-    	</thead>
-    	<tbody>
-	     	<tr>
-	      		<td width="50%" rowspan="3">
-	        		<div id="scatter"></div>
-	      		</td>
-	      		<td width="15%" rowspan="3">
-	        		<div id="legend"></div>
-	        		<div id="legend_form"></div>
-	      		</td>
-	      		<td width="35%">
-	     			<div id="carte">
-	     				<button type="button" id="reset" class="button">Reset</button>
-	     			</div>
-	     		</td> 
-	     	</tr>
-	     	<tr>
-	      		<td width="35%" rowspan="2">
-	        		<div id="line_chart"></div>
-	      		</td>
-	     	</tr>
-     	</tbody>
+     	<tr>
+      		<td width="50%" rowspan="3">
+        		<div id="scatter"></div>
+				<div id="slider">
+					<div class="field">
+						<div class="value left">2004</div>
+						<input type='range' min='2004' max='2020' step='1' value='2004' id='rangeSlider'/>
+						<div class="value right">2020</div>
+					</div>
+					<div class="buttons">
+						<input type="image" id="start" src="images/play.png"/>
+						<input type="image" id="stop" src="images/stop.png"/>
+					</div>
+				</div>
+      		</td>
+      		<td width="20%" rowspan="3">
+        		<div id="legend"></div>
+        		<div id="legend_form"></div>
+      		</td> 
+      		<td width="30%">
+        		<div id="carte">
+					<button type="button" id="reset" class="button">Reset</button>
+				</div>
+      		</td>
+     	</tr>
+     	<tr>
+      		<td width="30%" rowspan="2">
+        		<div id="line_chart"></div>
+      		</td>
+     	</tr>
     </table>
   </div>
 

@@ -134,29 +134,33 @@ input[type="checkbox"]:checked:after {
   margin-top: 5px;
 }
 
+
 .field{
   display: flex;
   align-items: center;
   height: 100%;
-  width: 245px;
+  width: 75%;
   float: left;
   margin-top: 10px;
-  flex-wrap
+  flex-flow: flow-row;
 }
 .field .value{
-  position: absolute;
+  /*position: absolute;*/
+  width:10%;
   font-size: 12px;
   color: ##5b5b5b;
   font-weight: 600;
 }
 .field .value.left{
-  left: 10px;
+  text-align: right;
 }
 #rangeSlider{
-  margin-left:40px;
+  margin-left:0px;
+  width:80%;
 }
+
 .field .value.right{
-  left: 215px;
+  text-align: left;
 }
 
 #start{

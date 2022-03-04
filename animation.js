@@ -1,11 +1,12 @@
 //Variables
+var myTimer;
+
 let checkbox_P = document.getElementById('petit');
 let checkbox_M = document.getElementById('moyen');
 let checkbox_G = document.getElementById('grand');
 
-var myTimer;
 
-// Variable selector
+// Variable d'etude
 let options = ["Nombre d'entrées","Nombre d'établissements","Nombre d'écrans","Nombre de fauteuils","Nombre de séances","Recette","Recette moyenne par entrée","Taux moyen d'occupation des fauteuils"].map(d => `<option value="${d}">${d}</option>`);
 let variable_node = document.getElementById('VarSelect');
 
@@ -14,15 +15,12 @@ for (option of options){
 }
 
 let variable = variable_node.value;
-console.log(variable);
-
 
 
 //Evenements
 checkbox_P.addEventListener('change', () => {modify_scatter();modify_legend();});
 checkbox_M.addEventListener('change', () => {modify_scatter();modify_legend();});
 checkbox_G.addEventListener('change', () => {modify_scatter();modify_legend();});
-
 
 
 d3.select("#VarSelect").on("change", function() {
