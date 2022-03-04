@@ -54,36 +54,45 @@
 		</div>
 	</div>
     <table width="100%">
-     	<tr>
-      		<td width="50%" rowspan="3">
-        		<div id="scatter"></div>
-				<div id="slider">
-					<div class="field">
-						<div class="value left">2004</div>
-						<input type='range' min='2004' max='2020' step='1' value='2004' id='rangeSlider'/>
-						<div class="value right">2020</div>
+    	<thead>
+    		<tr colspan="3">
+    			<td>
+    				<div id="title"></div>
+    			</td>
+    		</tr>
+    	</thead>
+    	<tbody>
+	     	<tr>
+	      		<td width="50%" rowspan="4">
+	        		<div id="scatter"></div>
+					<div id="slider">
+						<div class="field">
+							<div class="value left">2004</div>
+							<input type='range' min='2004' max='2020' step='1' value='2004' id='rangeSlider'/>
+							<div class="value right">2020</div>
+						</div>
+						<div class="buttons">
+							<input type="image" id="start" src="images/play.png"/>
+							<input type="image" id="stop" src="images/stop.png"/>
+						</div>
 					</div>
-					<div class="buttons">
-						<input type="image" id="start" src="images/play.png"/>
-						<input type="image" id="stop" src="images/stop.png"/>
+	      		</td>
+	      		<td width="15%" rowspan="4">
+	        		<div id="legend"></div>
+	        		<div id="legend_form"></div>
+	      		</td> 
+	      		<td width="35%">
+	        		<div id="carte">
+						<button type="button" id="reset" class="button">Reset</button>
 					</div>
-				</div>
-      		</td>
-      		<td width="20%" rowspan="3">
-        		<div id="legend"></div>
-        		<div id="legend_form"></div>
-      		</td> 
-      		<td width="30%">
-        		<div id="carte">
-					<button type="button" id="reset" class="button">Reset</button>
-				</div>
-      		</td>
-     	</tr>
-     	<tr>
-      		<td width="30%" rowspan="2">
-        		<div id="line_chart"></div>
-      		</td>
-     	</tr>
+	      		</td>
+	     	</tr>
+	     	<tr>
+	      		<td width="30%" rowspan="3">
+	        		<div id="line_chart"></div>
+	      		</td>
+	     	</tr>
+     	</tbody>
     </table>
   </div>
 
