@@ -50,12 +50,12 @@ function getFrancePromise() {
 
 
 //Détermination des bornes du slider
-rawYear.then((result) => {
+/*rawYear.then((result) => {
 	let minYear = d3.min(result);
 	document.getElementById("rangeSlider").min = d3.min(result);
 	document.getElementById("rangeSlider").max = d3.max(result);
 	document.getElementById("rangeSlider").value = d3.min(result);
-  });
+  });*/
 
 
 //importation données utiles

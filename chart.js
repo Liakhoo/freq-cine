@@ -1,15 +1,14 @@
+//Creation line chart
 async function chart(k = "freq", q = [],type = "T") {
   const margin = ({top: 45, right: 30, bottom: 50, left: 60})
   const height = 350;
   const width = 600;
-  //const key = getKey(variable)
-  //const unit = getUnit(variable)
 
   //Création du svg
   const svg = d3.create("svg")
       .attr("viewBox", [0, 0, width, height])
 
-      //Récupération des données à afficher
+  //Récupération des données à afficher
   let data = await getDataPromise();
     
   d3.schemePaired.push("#F236BB");
@@ -20,9 +19,8 @@ async function chart(k = "freq", q = [],type = "T") {
   var rawYear;
   var regionName;
   //Pré-traitement régions étudiées
-  if (q.length == 0){
+  if (q.length == 0){ //Cas ou aucune region n'est selectionnee
     q = await getPromiseValues("region");
-    //var newdataset = data.filter(d => d.region == q[7]); //Île-de-France
     var newdataset = data.filter(d => d.type == type);
     newdataset = newdataset.filter(d => d[k] != 0);
     dataValue = getValues(newdataset,k);
@@ -36,11 +34,11 @@ async function chart(k = "freq", q = [],type = "T") {
     newdataset = newdataset.filter(d => d[k] != 0);
     dataValue = getValues(newdataset,k);
     rawYear = getValues(newdataset, "year").sort();
-    if (q.length == 1){
+    if (q.length == 1){ //une seule region selectionnee
       let name = await parseRegion(q[0]);
       regionName = `de la région : ${name}`;
     }
-    else{
+    else{ //Plusieurs regions selectionnees 
       let region_names = await parseRegion(q[0]);
       for (let i=1; i < q.length - 1; i++){
         let name = await parseRegion(q[i])
@@ -62,7 +60,7 @@ async function chart(k = "freq", q = [],type = "T") {
     .domain([d3.max(dataValue), 0])
     .range([margin.top, height - margin.bottom])
 
-  //Création de la ligne
+  //Création fonction de la ligne
   let line = d3.line()
     .x((d, i) => x(d.year)-margin.left)
     .y(d => y(d[k]))
@@ -131,6 +129,7 @@ async function chart(k = "freq", q = [],type = "T") {
   return svg.node();
 };
 
+//Affichage line chart
 let chart_node = chart(getKey(variable));
 
 chart_node.then((result) => {

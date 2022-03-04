@@ -1,3 +1,4 @@
+//Creation scatterplot
 async function scatterplot(var_x = "recette", var_y = "freq") {
   // set the dimensions and margins of the graph
   var margin = {top: 30, right: 0, bottom: 10, left: 50},
@@ -21,7 +22,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
 
   let variable_node = document.getElementById('VarSelect');
   let variable = variable_node.value;
-  
+
   function calculateMin(dataset, dataP, dataM, dataG, key) {
     let min_P = d3.max(dataset, d => d[key])
     let min_M = d3.max(dataset, d => d[key])
@@ -206,7 +207,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
       .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("G") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + unitMap.get(var_x) + "\nIndice de fréquentation : " + d[var_y])
   }
 
-    //Création du titre du graphique
+  //Création du titre du graphique
   svg.append("text")
     .style("font-size","15px")
     .style("text-anchor", "middle")
@@ -237,8 +238,8 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
   return svg.node();
 }
 
-
-  async function legend_scatterplot() {
+//Creation légende de couleur
+async function legend_scatterplot() {
   // set the dimensions and margins of the graph
   var margin = {top: 30, right: 10, bottom: 5, left: 5},
       width =260 - margin.left - margin.right,
@@ -285,6 +286,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
   return svg.node();
 }
 
+//Creation legende taille
 async function legend_form() {
   //dimension et marges de la légende
   var margin = {top: 20, right: 5, bottom: 5, left: 5},
@@ -356,7 +358,7 @@ async function legend_form() {
     if (document.querySelector('#grand').checked){
       moy_G = d3.mean(dataG, d => d[key]);
     }
-    //recalcule de la moyenne en enlevant les tailles non sélectionnée
+    //recalcule de la moyenne en enlevant les tailles non sélectionnées
     var moy_list = [moy_P,moy_M,moy_G]
     moy_list.sort((a,b)=>a-b)
     while (moy_list[0]==0 && moy_list!=[]){
@@ -397,6 +399,7 @@ async function legend_form() {
   return svg.node();
 }
 
+//Affichage du scatterplot et des légendes associees
 
 let scatter_node = scatterplot(getKey(variable)); // normalement scatterplot(filteredData, getKey(variable))
 
