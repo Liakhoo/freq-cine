@@ -31,4 +31,4 @@ Le code Javascript a été réparti dans plusieurs fichiers :
 - <tt>geo_map.js</tt> : contient la fonction de création de la carte et son affichage sur le site.
 - <tt>animation.js</tt> : contient les fonctions et variables permettant une interaction entre les différents graphiques et les filtres.
 
-Enfin, le dossier "image" contient les différentes images que nous avons utilisé sur le site.
+Enfin, le dossier "image" contient les différentes images que nous avons utilisées sur le site.
