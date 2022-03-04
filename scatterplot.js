@@ -19,6 +19,9 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
   let newdataset_M = newdataset.filter(d => d.type === "M");
   let newdataset_G = newdataset.filter(d => d.type === "G");
 
+  let variable_node = document.getElementById('VarSelect');
+  let variable = variable_node.value;
+  
   function calculateMin(dataset, dataP, dataM, dataG, key) {
     let min_P = d3.max(dataset, d => d[key])
     let min_M = d3.max(dataset, d => d[key])
@@ -144,7 +147,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
         }
       })
     .append("title")
-    .text(d => "Région : "+ regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("P") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y])
+    .text(d => "Région : "+ regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("P") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + unitMap.get(var_x) + "\nIndice de fréquentation : " + d[var_y])
       
   }
   
@@ -173,7 +176,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
         }
       })
       .append("title")
-      .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("M") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y])
+      .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("M") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + unitMap.get(var_x) + "\nIndice de fréquentation : " + d[var_y])
   }
 
   //Triangles
@@ -200,7 +203,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
         }
       })
       .append("title")
-      .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("G") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + "\nIndice de fréquentation : " + d[var_y])
+      .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("G") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + unitMap.get(var_x) + "\nIndice de fréquentation : " + d[var_y])
   }
 
     //Création du titre du graphique
@@ -212,13 +215,14 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     .text(`Indice de fréquentation en fonction ${getTitle(var_x)} `);
 
   //Creation du titre de l'axe des abscisses
+  var unit = unitMap.get(var_x) != "" ? `(en ${unitMap.get(var_x)})` : "";
   svg.append("text")
     .attr("class", "x label")
     .style("font-size","10px")
     .style("text-anchor", "middle")
     .attr("x", (width + margin.left + margin.right)/2)
     .attr("y", height + margin.bottom + 5)
-    .text(`${keyMap.get(var_x)} ${unitMap.get(var_x)}`);
+    .text(`${keyMap.get(var_x)} ${unit}`);
 
   //Creation du titre de l'axe des ordonnees
   svg.append("text")

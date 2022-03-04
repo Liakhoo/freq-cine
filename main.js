@@ -62,7 +62,7 @@ rawYear.then((result) => {
 const keys = ["etab","ecrans","fauteuils","seances","entrees","recette","rme","freq","tmof"];
 const names = ["Établissements","Écrans","Fauteuils","Séances","Entrées","Recette","Recette moyenne par entrée","Indice de fréquentation","Taux moyen d'occupation des fauteuils"];
 const keyMap = buildMap(keys,names);
-const unit = ["","","(en milliers)","(en milliers)","(en millions)","(en millions d'€)","(en €)","","(en %)"];
+const unit = ["",""," milliers"," milliers"," millions"," millions d'€"," €",""," %"];
 const unitMap = buildMap(keys,unit);
 
 
