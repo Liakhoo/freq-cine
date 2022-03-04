@@ -213,3 +213,6 @@ input[type="checkbox"]:checked:after {
   left: 80%;
   top: 440px;
 }
+table{
+  margin-top: 10px;
+}
