@@ -213,7 +213,3 @@ input[type="checkbox"]:checked:after {
   left: 80%;
   top: 440px;
 }
-
-tbody{
-  vertical-align:top;
-}
