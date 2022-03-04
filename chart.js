@@ -25,7 +25,7 @@ async function chart(k = "freq", q = [],type = "T") {
     newdataset = newdataset.filter(d => d[k] != 0);
     dataValue = getValues(newdataset,k);
     rawYear = getValues(newdataset, "year").sort();
-    regionName = "Choisissez une région pour commener l'analyse";
+    regionName = "Choisissez une région pour commencer l'analyse";
 
   }
   else{

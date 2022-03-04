@@ -38,26 +38,16 @@
         	<button type="button" class="button" id="btn_cancel" onclick="fermerPopup()">OK</button>
         </div>
     </div>
-    <div class="VarSelect_box">
-	    <label for="VarSelect">Choix de la variable :</label>	
-	    <select id="VarSelect" name="VarSelect"></select>
-	</div>
-    <div>
-	    <div class="checkbox_label">Taille des cinémas : </div>
-	    <div class="checkbox_select">
-	    	<input type="checkbox" id="petit" name="petit" checked/>
-	    	<label for="petit" class="boxlabel">Petit</label>
-	    	<input type="checkbox" id="moyen" name="moyen" checked/>
-	    	<label for="moyen" class="boxlabel">Moyen</label>
-	    	<input type="checkbox" id="grand" name="grand" checked/>
-	    	<label for="grand" class="boxlabel">Grand</label>
-		</div>
-	</div>
     <table width="100%">
     	<thead>
     		<tr>
     			<td colspan="3">
+            <div class="VarSelect_box">
+              <label for="VarSelect">Choix de la variable :</label> 
+              <select id="VarSelect" name="VarSelect"></select>
+           </div>
     				<div id="title"></div>
+            <button type="button" id="reset" class="button">Réinitialiser choix région</button>
     			</td>
     		</tr>
     	</thead>
@@ -65,17 +55,28 @@
 	     	<tr>
 	      		<td width="50%" rowspan="4">
 	        		<div id="scatter"></div>
-					<div id="slider">
-						<div class="field">
-							<div class="value left">2004</div>
-							<input type='range' min='2004' max='2020' step='1' value='2004' id='rangeSlider'/>
-							<div class="value right">2020</div>
-						</div>
-						<div class="buttons">
-							<input type="image" id="start" src="images/play.png"/>
-							<input type="image" id="stop" src="images/stop.png"/>
-						</div>
-					</div>
+              <div class="check_container">
+              <div class="checkbox_label">Taille des cinémas : </div>
+                <div class="checkbox_select">
+                  <input type="checkbox" id="petit" name="petit" checked/>
+                  <label for="petit" class="boxlabel">Petit</label>
+                  <input type="checkbox" id="moyen" name="moyen" checked/>
+                  <label for="moyen" class="boxlabel">Moyen</label>
+                  <input type="checkbox" id="grand" name="grand" checked/>
+                  <label for="grand" class="boxlabel">Grand</label>
+                </div>
+              </div>
+    					<div id="slider">
+    						<div class="field">
+    							<div class="value left">2004</div>
+    							<input type='range' min='2004' max='2020' step='1' value='2004' id='rangeSlider'/>
+    							<div class="value right">2020</div>
+    						</div>
+    						<div class="buttons">
+    							<input type="image" id="start" src="images/play.png"/>
+    							<input type="image" id="stop" src="images/stop.png"/>
+    						</div>
+    					</div>
 	      		</td>
 	      		<td width="15%" rowspan="4">
 	        		<div id="legend"></div>
@@ -83,7 +84,6 @@
 	      		</td> 
 	      		<td width="35%">
 	        		<div id="carte">
-						<button type="button" id="reset" class="button">Reset</button>
 					</div>
 	      		</td>
 	     	</tr>
