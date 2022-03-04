@@ -21,8 +21,8 @@ Sous la carte se trouve un line chart représentation l'évolution temporelle de
 ## Contenu des fichiers
 
 Les données ont été réaorganisées et se trouvent dans le fichier <tt>freq-cine.csv</tt>.
-Le code HTML du site se trouve dans le fichier <tt>index.html</tt>.
-Le code CSS du site se trouve dans le fichier <tt>dataviz_freqcine_style.css</tt>.
+<br/>Le code HTML du site se trouve dans le fichier <tt>index.html</tt>.
+<br/>Le code CSS du site se trouve dans le fichier <tt>dataviz_freqcine_style.css</tt>.
 
 Le code Javascript a été réparti dans plusieurs fichiers :
 - <tt>main.js</tt> : contient les fonctions et variables principales, récupère les données qui vont être utilisé (les données de la carte et les données du fichier csv).
