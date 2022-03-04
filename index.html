@@ -54,32 +54,35 @@
     	<div class="buttons">
     		<input type="image" id="start" src="play.png"/>
 	    	<input type="image" id="stop" src="stop.png"/>
-	    	<button type="button" id="reset" class="button">Reset</button>
     	</div>
     </div>
     <table width="100%">
-     	<tr>
-      		<td width="50%" rowspan="3">
-        		<div id="scatter"></div>
-      		</td>
-      		<td width="20%" rowspan="3">
-        		<div id="legend"></div>
-        		<div id="legend_form"></div>
-      		</td> 
-      		<td width="30%">
-        		<div id="carte"></div>
-      		</td>
-     	</tr>
-     	<tr>
-      		<td width="30%" rowspan="2">
-        		<div id="line_chart"></div>
-      		</td>
-     	</tr>
-     	<tr>
-     		<td width="20%">
-     			
-     		</td>
-     	</tr>
+    	<thead>
+	    	<td colspan="3">
+	    		<div  id="title"></div>
+	    	</td>
+    	</thead>
+    	<tbody>
+	     	<tr>
+	      		<td width="50%" rowspan="3">
+	        		<div id="scatter"></div>
+	      		</td>
+	      		<td width="15%" rowspan="3">
+	        		<div id="legend"></div>
+	        		<div id="legend_form"></div>
+	      		</td>
+	      		<td width="35%">
+	     			<div id="carte">
+	     				<button type="button" id="reset" class="button">Reset</button>
+	     			</div>
+	     		</td> 
+	     	</tr>
+	     	<tr>
+	      		<td width="35%" rowspan="2">
+	        		<div id="line_chart"></div>
+	      		</td>
+	     	</tr>
+     	</tbody>
     </table>
   </div>
 

@@ -64,8 +64,6 @@ d3.select("#reset").on("click",function () {
         c.style.fill = "rgb(104,104,104)";
         c.style.stroke = "#000000";
       }
-  let title_node = map_node.querySelector('.title');
-  title_node.innerHTML = 'Choisissez la région à étudier';
 
   //Mise à jour line chart
   let q_var = [];

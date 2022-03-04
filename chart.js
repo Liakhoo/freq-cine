@@ -27,7 +27,7 @@ async function chart(k = "freq", q = [],type = "T") {
     newdataset = newdataset.filter(d => d[k] != 0);
     dataValue = getValues(newdataset,k);
     rawYear = getValues(newdataset, "year").sort();
-    regionName = "de toutes les régions de France";
+    regionName = "Choisissez une région pour commener l'analyse";
 
   }
   else{
@@ -38,7 +38,7 @@ async function chart(k = "freq", q = [],type = "T") {
     rawYear = getValues(newdataset, "year").sort();
     if (q.length == 1){
       let name = await parseRegion(q[0]);
-      regionName = `de la région : ${name}`;
+      regionName = `Région sélectionnée : ${name}`;
     }
     else{
       let region_names = await parseRegion(q[0]);
@@ -48,9 +48,13 @@ async function chart(k = "freq", q = [],type = "T") {
       }
       name = await parseRegion(q[q.length - 1]);
       region_names += " et " + name;
-      regionName = `des régions : ${region_names}`
-    }
+      regionName = `Régions sélectionnées : ${region_names}`
+    }  
   }
+
+  //Changement titre tableau
+  let title_node = document.getElementById('title');
+  title_node.innerHTML = `${regionName}`;
 
   //Mise à l'échelle de l'axe des abscisses
   const x = d3.scaleTime()
@@ -85,13 +89,13 @@ async function chart(k = "freq", q = [],type = "T") {
   }
 
   //Création du titre du graphique
-  /*svg.append("text")
+  svg.append("text")
     .attr("class", "titlebis")
     .style("font-size","20px")
     .style("text-anchor", "middle")
     .attr("x", (width + margin.left + margin.right)/2)
-    .attr("y", margin.top/3)
-    .text(`${keyMap.get(k)} ${regionName}`);*/
+    .attr("y", margin.top/2)
+    .text(`${keyMap.get(k)} en fonction du temps`);
 
   //Création du titre des axes
   svg.append("text")

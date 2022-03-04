@@ -44,7 +44,6 @@ async function geo_map(w=600, h=500, g) {
     	.attr('type','region')
     	.on("mouseover", function(d) {
           var mouse = d3.mouse(this);
-          //console.log(mouse);
       		// Création tooltip
           //tooltip.attr("transform", "translate("+ (mouse[0]-10) + "," + (mouse[1] - 10) + ")"); 
       		tooltip.style('opacity', 1).text(d.properties.nom).style('visibility','visible');
@@ -73,20 +72,6 @@ async function geo_map(w=600, h=500, g) {
       		chosen_region.push(d.properties.nom);
           chosen_node.push(document.querySelector(`.${d.properties.nom.split(' ').join('-').split("'").join('')}`));
       		
-      		//Changement titre carte
-      		let title_node = document.querySelectorAll('.title');
-          let nbRegions = chosen_region.length;
-          if (nbRegions == 1){
-            title_node[0].innerHTML = `La région choisie est : ${chosen_region[0]}`;
-          }
-          else{
-            region_names = chosen_region[0];
-            for (let i=1; i < nbRegions - 1; i++){
-              region_names += ", " + chosen_region[i];
-            }
-            region_names += " et " + chosen_region[nbRegions - 1];
-            title_node[0].innerHTML = `Les régions choisies sont : ${region_names}`;
-          }
       		
       
       		// Coloration en rouge de la région sélectionnée
@@ -123,13 +108,13 @@ async function geo_map(w=600, h=500, g) {
          })
 
 
-    svg.append("text")
+    /*svg.append("text")
     	.attr('class','title')
     	.style("font-size","20px")
        	.style("text-anchor", "middle")
        	.attr("x", (w + margin.left + margin.right)/2)
        	.attr("y", h-5*margin.bottom)
-      	.text('Choisissez la région à étudier')
+      	.text('Choisissez la région à étudier')*/
   
 
   return svg.node();
