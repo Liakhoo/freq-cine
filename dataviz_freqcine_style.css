@@ -87,6 +87,10 @@ select:hover{
   margin-bottom: 10px;
 }
 
+.check_container{
+  margin-left:10%;
+}
+
 .checkbox_label{
   float: left;
   width: 160px;
@@ -179,12 +183,6 @@ input[type="checkbox"]:checked:after {
 }
 #stop:hover{
   opacity: 1;
-}
-
-#reset{
-  position: absolute;
-  top: 350px;
-  right: 60px;
 }
 
 .button {
