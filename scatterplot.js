@@ -241,7 +241,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
 //Creation légende de couleur
 async function legend_scatterplot() {
   // set the dimensions and margins of the graph
-  var margin = {top: 30, right: 10, bottom: 5, left: 5},
+  var margin = {top: 0, right: 10, bottom: 5, left: 5},
       width =260 - margin.left - margin.right,
       height = 150 - margin.top - margin.bottom;
 
