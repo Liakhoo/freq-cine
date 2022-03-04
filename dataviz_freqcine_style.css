@@ -211,5 +211,9 @@ input[type="checkbox"]:checked:after {
   color: #5b5b5b;
   padding: 4px;
   left: 80%;
-  top: 500px;
+  top: 440px;
+}
+
+tbody{
+  vertical-align:top;
 }
