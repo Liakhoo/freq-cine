@@ -145,12 +145,12 @@ function getTitle(expr) {
       return "du nombre de séances";
     case "etab":
       return "du nombre d'établissements";
-    case "Nombre d'écrans":
-      return "ecrans";
-    case "Nombre de fauteuils":
-      return "fauteuils";
-    case "Taux moyen d'occupation des fauteuils":
-      return "tmof";
+    case "ecrans":
+      return "du nombre d'écrans";
+    case "fauteuils":
+      return "du nombre de fauteuils";
+    case "tmof":
+      return "du temps moyen d'occupation des fauteuils";
     default:
       return "";
   }
