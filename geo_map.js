@@ -1,5 +1,5 @@
 //Creation carte
-async function geo_map(w=600, h=500, g) {
+async function geo_map(w=300, h=300, g) {
 	// initialisation svg
 	const svg = g || d3.create("svg")
       .attr("viewBox", [0, 0, w, h])
@@ -11,7 +11,7 @@ async function geo_map(w=600, h=500, g) {
 
 	let projection = d3.geoConicConformal()
     	.center([2.454071, 46.279229])
-    	.scale(1500)
+    	.scale(1100)
     	.translate([width / 2, height / 2]);
 
   let path = d3.geoPath(projection);

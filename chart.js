@@ -1,7 +1,7 @@
 //Creation line chart
 async function chart(k = "freq", q = [],type = "T") {
   const margin = ({top: 45, right: 30, bottom: 50, left: 60})
-  const height = 350;
+  const height = 250;
   const width = 600;
 
   //Création du svg

@@ -17,10 +17,10 @@
   </div>
   <div class="container">
     <div class="info-popup" id="popupPage">
-    	<div class="popup_container">
-    		<p>
-    			Les données sont tirées du site du <strong>Centre National du Cinéma et de l'image animée (CNC)</strong>. Elles rassemblent les statistiques des fréquentations et des recettes des cinémas en France et par région. Les relevés généraux pour une région sont accessibles depuis 1966 (1992 pour le nombre d'établissements et de séances), cependant la répartition par type d'établissement n'est réalisée que depuis 2004.
-    		</p>
+      <div class="popup_container">
+        <p>
+          Les données sont tirées du site du <strong>Centre National du Cinéma et de l'image animée (CNC)</strong>. Elles rassemblent les statistiques des fréquentations et des recettes des cinémas en France et par région. Les relevés généraux pour une région sont accessibles depuis 1966 (1992 pour le nombre d'établissements et de séances), cependant la répartition par type d'établissement n'est réalisée que depuis 2004.
+        </p>
         <p>
           Précisions sur les tailles de cinémas :
           <ul>
@@ -29,32 +29,35 @@
             <li>Grand : > 450 000 entrées</li>
           </ul>
         </p>
-    		<p>
-    			Toutes les informations concernant ce projet se trouve dans un notebook Observable dont l'accès est limité afin de le dédier exclusivement à la notation de ce projet.
-    		</p>
-    		<p>
-    			<a href="https://observablehq.com/d/74b63a4617f4244c">Lien vers le notebook</a>
-    		</p>
-        	<button type="button" class="button" id="btn_cancel" onclick="fermerPopup()">OK</button>
+        <p>
+          Toutes les informations concernant ce projet se trouve dans un notebook Observable dont l'accès est limité afin de le dédier exclusivement à la notation de ce projet.
+        </p>
+        <p>
+          <a href="https://observablehq.com/d/74b63a4617f4244c">Lien vers le notebook</a>
+        </p>
+          <button type="button" class="button" id="btn_cancel" onclick="fermerPopup()">OK</button>
         </div>
     </div>
     <table width="100%">
-    	<thead>
-    		<tr>
-    			<td colspan="3">
-		            <div class="VarSelect_box">
-		              	<label for="VarSelect">Choix de la variable :</label> 
-		              	<select id="VarSelect" name="VarSelect"></select>
-		            </div>
-    				<div id="title"></div>
-            		<button type="button" id="reset" class="button">Réinitialiser choix région</button>
-    			</td>
-    		</tr>
-    	</thead>
-    	<tbody>
-	     	<tr>
-	      		<td width="50%" rowspan="4">
-	        		<div id="scatter"></div>
+      <thead>
+        <tr>
+          <td colspan="3">
+                <div class="VarSelect_box">
+                    <label for="VarSelect">Choix de la variable :</label> 
+                    <select id="VarSelect" name="VarSelect"></select>
+                </div>
+            <div id="title"></div>
+                <button type="button" id="reset" class="button">Réinitialiser choix région</button>
+          </td>
+        </tr>
+      </thead>
+    </table>
+
+    <table width="100%">
+<thead>
+  <tr>
+    <td width="60%" rowspan="5">
+      <div id="scatter"></div>
               <div class="check_container">
               <div class="checkbox_label">Taille des cinémas : </div>
                 <div class="checkbox_select">
@@ -66,33 +69,39 @@
                   <label for="grand" class="boxlabel">Grand</label>
                 </div>
               </div>
-    					<div id="slider">
-    						<div class="field">
-    							<div class="value left">2004</div>
-    							<input type='range' min='2004' max='2020' step='1' value='2004' id='rangeSlider'/>
-    							<div class="value right">2020</div>
-    						</div>
-    						<div class="buttons">
-    							<input type="image" id="start" src="images/play.png"/>
-    							<input type="image" id="stop" src="images/stop.png"/>
-    						</div>
-    					</div>
-	      		</td>
-	      		<td width="15%" rowspan="4">
-	        		<div id="legend"></div>
-	        		<div id="legend_form"></div>
-	      		</td> 
-	      		<td width="35%">
-	        		<div id="carte"></div>
-	      		</td>
-	     	</tr>
-	     	<tr>
-	      		<td width="30%" rowspan="3">
-	        		<div id="line_chart"></div>
-	      		</td>
-	     	</tr>
-     	</tbody>
-    </table>
+              <div id="slider">
+                <div class="field">
+                  <div class="value left">2004</div>
+                  <input type='range' min='2004' max='2020' step='1' value='2004' id='rangeSlider'/>
+                  <div class="value right">2020</div>
+                </div>
+                <div class="buttons">
+                  <input type="image" id="start" src="images/play.png"/>
+                  <input type="image" id="stop" src="images/stop.png"/>
+                </div>
+              </div>
+    </td>
+    <td width="15%" rowspan="2" id="td2">
+      <div id="legend"></div>
+      <div id="legend_form"></div>
+    </td>
+    <td width="25%" rowspan="2">
+      <div id="carte"></div>
+    </td>
+  </tr>
+  <tr>
+  </tr>
+  <tr>
+    <td width="40%" colspan="2" rowspan="3">
+      <div id="line_chart"></div>
+    </td>
+  </tr>
+  <tr>
+  </tr>
+</thead>
+</table>
+
+    
   </div>
 
   
