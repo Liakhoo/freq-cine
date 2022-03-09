@@ -1,4 +1,4 @@
-# freq-cine
+# Fréquentation et recette des cinémas en France
 
 Autrices : Camille BUISSON et Céline RAILLÉ
 
@@ -37,7 +37,7 @@ Plusieurs filtres permettent une analyse plus précise du scatterplot. Il est en
 
 Une analyse plus poussée par région est possible en sélectionnant une région sur la carte située à droite du scatterplot, ce qui va mettre en avant sur le scatterplot les points qui correspondent à la région choisie. Il est possible sur la carte de choisir plusieurs régions. Le bouton "reset" permet de remettre à zéro le choix des régions.
 
-Sous la carte se trouve un line chart représentation l'évolution temporelle de la variable d'étude choisie pour chaque région choisie. Ce line chart ne considère que les totaux pour l'ensemble des établissement de chaque région. Si aucune région n'est choisie sur la carte, le line chart affiche les données pour toutes les régions de France métropolitaine.
+Sous la carte se trouve un line chart représentant l'évolution temporelle de la variable d'étude choisie pour chaque région choisie. Ce line chart ne considère que les totaux pour l'ensemble des établissement de chaque région. Si aucune région n'est choisie sur la carte, le line chart affiche les données pour toutes les régions de France métropolitaine.
 
 Ci-dessous ce trouve le prototype papier auquel nous avons pensé (il est possible qu'il diffère légèrement du produit final).
 ![alt text](https://www.zupimages.net/up/22/10/0ekh.png)
@@ -55,4 +55,16 @@ Le code Javascript a été réparti dans plusieurs fichiers :
 - <tt>geo_map.js</tt> : contient la fonction de création de la carte et son affichage sur le site.
 - <tt>animation.js</tt> : contient les fonctions et variables permettant une interaction entre les différents graphiques et les filtres.
 
-Enfin, le dossier "image" contient les différentes images que nous avons utilisées sur le site.
+Enfin, le dossier "images" contient les différentes images que nous avons utilisées sur le site.
+
+
+## Première interprétations
+
+Tout d'abord, nous pouvons remarquer que toutes les régions ont des tendances similaires. En considérant par exemple le nombre d'entrées, nous pouvons observer pour toutes les régions une diminution du nombre d'entrée dans les années 80 avant une augmentation dans les 90, cette dernière étant due à l'apparition des multiplexes dans les cinémas des villes moins importantes. De temps en temps, nous pouvons remarquer quelques divergences, comme le nombre d'entrées pour la Corse qui fait un pic en 1980 (sûrement à cause de la sortie d'un film corse au cinéma cette année-là), mais ces dernières sont rares.
+
+L'impact de la Covid-19 est bien sûr visible pour l'année 2020, avec une chute drastique pour la plupart des indicateurs (nombre d'entrées, nombre de séances, recettes...).
+
+Nous pouvons également identifier l'augmentation du prix des places de cinémas et du nombre de cinémas. En effet, même si nous remarquons depuis les années 2000 un nombre d'entrées plutôt stable (exception faite de l'année 2020), les recettes ne cessent d'augmenter, ce qui prouve que le prix d'une entrée a augmenté.
+
+Enfin, une dernière observation concerne les établissements présents dans chaque région. Il y a très souvent un nombre important de cinémas réalisant peu d'entrées, et peu de gros cinémas réalisant beaucoup d'entrées. Néanmoins, la région Île-de-France est une exception : elle contient un nombre de grands établissements non néagligeables.
+
