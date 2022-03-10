@@ -90,10 +90,12 @@ function modify_scatter() {
   let variable_node = document.getElementById('VarSelect');
   let variable = variable_node.value;
 
-  let scatter_node = scatterplot(getKey(variable)); //Nouveau scatterplot
+  scatterplot(getKey(variable), "freq", true);
+
+  /*let scatter_node = scatterplot(getKey(variable)); //Nouveau scatterplot
   scatter_node.then((result) => {
     td_node[0].replaceChild(result, svg_node[0]); // mise à jour du scatterplot
-  });
+  });*/
 };
 
 function modify_legend() {

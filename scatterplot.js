@@ -1,5 +1,5 @@
 //Creation scatterplot
-async function scatterplot(var_x = "recette", var_y = "freq") {
+async function scatterplot(var_x = "entrees", var_y = "freq", update=false) {
   // set the dimensions and margins of the graph
   var margin = {top: 30, right: 0, bottom: 10, left: 50},
       width = 550 - margin.left - margin.right,
@@ -95,15 +95,90 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
   //const rawRegion = getValues(data, "region");
   const color = d3.scaleOrdinal(rawRegion,d3.schemePaired);
 
+
+  var unit = unitMap.get(var_x) != "" ? `(en ${unitMap.get(var_x)})` : "";
+
+
+
+  if (update) {
+    d3.select("#scatter").selectAll(".xAxis")
+    .transition()
+    .duration(1000)
+    .call(d3.axisBottom().scale(x));
+
+    d3.select("#scatter").selectAll(".yAxis")
+      .transition()
+      .duration(1000)
+      .call(d3.axisLeft(y));
+
+    d3.select("#scatter").selectAll(".x_label")
+      .transition()
+      .duration(1000)
+      .text(`${keyMap.get(var_x)} ${unit}`);
+
+    d3.select("#scatter").selectAll(".year")
+      .transition()
+      .duration(1000)
+      .text(`${date}`);
+
+    //Points
+    let circles = d3.select("#scatter").selectAll("circle").data(newdataset_P);
+
+    circles.enter()
+    .append("circle")
+    .merge(circles)
+    .transition()
+    .duration(1000)
+    .attr("cx", d => x(d[var_x]))
+    .attr("cy", d => y(d[var_y]))
+    .attr("r", d => taille(d["etab"]))
+    .attr("display", d => document.querySelector('#petit').checked ? "inherit" : "none")
+    
+
+    //Carrés
+    let rects = d3.select("#scatter").selectAll("rect").data(newdataset_M);
+
+    rects.enter()
+    .append("rect")
+    .merge(rects)
+    .transition()
+    .duration(1000)
+    .attr("x", d => x(d[var_x]) - taille(d["etab"]))
+    .attr("y", d => y(d[var_y]) - taille(d["etab"]))
+    .attr("height", d => 2*taille(d["etab"]))
+    .attr("width", d => 2*taille(d["etab"]))
+    .attr("display", d => document.querySelector('#moyen').checked ? "inherit" : "none")
+    
+
+    //Triangles
+    let poly = d3.select("#scatter").selectAll("polygon").data(newdataset_G);
+
+    poly.enter()
+    .append("polygon")
+    .merge(poly)
+    .transition()
+    .duration(1000)
+    .attr("points", d => {
+            return String(x(d[var_x]) - taille(d["etab"])) + "," + String(y(d[var_y]) + taille(d["etab"])) + " " + String(x(d[var_x])) + "," + String(y(d[var_y]) - taille(d["etab"])) + " " + String(x(d[var_x]) + taille(d["etab"])) + "," + String(y(d[var_y]) + taille(d["etab"]));
+    })
+    .attr("display", d => document.querySelector('#grand').checked ? "inherit" : "none")
+
+    return 0;
+  }
+
+
+
   //Axes
   let xAxis = g => g
     .attr("transform", `translate(0,${height - margin.bottom})`)
     .style("font-size","5px")
+    .attr("class","xAxis")
     .call(d3.axisBottom(x))
 
   let yAxis = g => g
       .attr("transform", `translate(${margin.left},0)`)
       .style("font-size","5px")
+      .attr("class","yAxis")
       .call(d3.axisLeft(y))
 
   svg.append("g")
@@ -114,7 +189,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
 
   //Année
   svg.append("text")
-    .attr("class", "y label")
+    .attr("class", "year")
     .style("font-size","50px")
     .attr("fill","#c6c6c6")
     .attr("text-anchor", "middle")
@@ -125,7 +200,6 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
 
 
   //Points
-  if (document.querySelector('#petit').checked){
     svg.selectAll("circle").data(newdataset_P)
     .enter()
     .append("circle")
@@ -149,11 +223,9 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
       })
     .append("title")
     .text(d => "Région : "+ regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("P") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + unitMap.get(var_x) + "\nIndice de fréquentation : " + d[var_y])
-      
-  }
+    
   
   //Carrés
-  if (document.querySelector('#moyen').checked){
     svg.selectAll("rect").data(newdataset_M)
       .enter()
       .append("rect")
@@ -178,10 +250,9 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
       })
       .append("title")
       .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("M") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + unitMap.get(var_x) + "\nIndice de fréquentation : " + d[var_y])
-  }
+  
 
   //Triangles
-  if (document.querySelector('#grand').checked){
     svg.selectAll("polygon").data(newdataset_G)
       .enter()
       .append("polygon")
@@ -205,7 +276,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
       })
       .append("title")
       .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("G") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + unitMap.get(var_x) + "\nIndice de fréquentation : " + d[var_y])
-  }
+  
 
   //Création du titre du graphique
   svg.append("text")
@@ -216,9 +287,8 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
     .text(`Indice de fréquentation en fonction ${getTitle(var_x)} `);
 
   //Creation du titre de l'axe des abscisses
-  var unit = unitMap.get(var_x) != "" ? `(en ${unitMap.get(var_x)})` : "";
   svg.append("text")
-    .attr("class", "x label")
+    .attr("class", "x_label")
     .style("font-size","10px")
     .style("text-anchor", "middle")
     .attr("x", (width + margin.left + margin.right)/2)
@@ -227,7 +297,7 @@ async function scatterplot(var_x = "recette", var_y = "freq") {
 
   //Creation du titre de l'axe des ordonnees
   svg.append("text")
-    .attr("class", "y label")
+    .attr("class", "y-label")
     .style("font-size","10px")
     .attr("text-anchor", "middle")
     .attr("x", 0)
