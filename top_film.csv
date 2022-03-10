@@ -1,56 +1,56 @@
-annee;nom;realisateur;entrees
-1.966 ;La Grande Vadrouille;Gérard Oury;17272987
-1.967 ;Les Grandes Vacances;Jean Girault;6986917
-1.968 ;Le gendarme se marie;Jean Girault;6828626
-1.969 ;Il était une fois dans l'Ouest;Sergio Leone;14862831
-1.970 ;Le Gendarme en balade;Jean Girault;4870673
-1.971 ;Les Bidasses en folie;Claude Zidi;7460911
-1.972 ;Orange mécanique;Stanley Kubrick;6193896
-1.973 ;Les Aventures de Rabbi Jacob;Gérard Oury;7295811
-1.974 ;Emmanuelle;Just Jaeckin;8894024
-1.975 ;La Tour infernale;John Guillermin;4466376
-1.976 ;Les Dents de la Mer;Steven Spielberg;6261062
-1.977 ;Les Aventures de Bernard et Bianca;Wolfgang Reitherman;5219476
-1.978 ;Midnight Express;Alan Parker;5973335
-1.979 ;Le Gendarme et les Extra-terrestres;Jean Girault;6280070
-1.980 ;La Boum;Claude Pinoteau;4378430
-1.981 ;La Chèvre;Francis Veber;7079674
-1.982 ;"E.T., l'extra-terrestre";Steven Spielberg;7881332
-1.983 ;Les dieux sont tombés sur la tête;Jamie Uys;5950061
-1.984 ;Marche à l'ombre;Michel Blanc;6168425
-1.985 ;Trois hommes et un couffin;Coline Serreau;10251465
-1.986 ;Jean de Florette;Claude Berri;7223657
-1.987 ;Crocodile Dundee;Peter Faiman;5887982
-1.988 ;Le Grand Bleu;Luc Besson;9074317
-1.989 ;Rain Man;Barry Levinson;6474520
-1.990 ;Le Cercle des poètes disparus;Peter Weir;6599969
-1.991 ;Danse avec les loups;Kevin Costner;7280124
-1.992 ;Basic Instinct;Paul Verhoeven;4615376
-1.993 ;Les Visiteurs;Jean-Marie Poiré;13782991
-1.994 ;Le Roi Lion;R. Minkoff - R. Allers;10135871
-1.995 ;Les Trois Frères;B. Campan - D. Bourdon;6897098
-1.996 ;Le Bossu de Notre-Dame;G. Trousdale - K. Wise;6833195
-1.997 ;Le Cinquième Élément;Luc Besson;7727697
-1.998 ;Titanic;James Cameron;20758841
-1.999 ;Astérix et Obélix contre César;Claude Zidi;8948624
-2.000 ;Taxi 2;Gérard Krawczyk;10349454
-2.001 ;Harry Potter à l?école des sorciers;Chris Columbus;9470090
-2.002 ;Astérix et Obélix : Mission Cléopâtre;Alain Chabat;14559509
-2.003 ;Le Monde de Nemo;A. Stanton - L. Unkrich;9528033
-2.004 ;Les Choristes;Christophe Barratier;8696013
-2.005 ;Harry Potter et la Coupe de Feu;Mike Newell;7732071
-2.006 ;Les Bronzés 3;Patrice Leconte;10355928
-2.007 ;Ratatouille;Brad Bird;7845210
-2.008 ;Bienvenue chez les Ch'tis;Dany Boon;20489303
-2.009 ;Avatar;James Cameron;14677888
-2.010 ;Harry Potter et les Reliques de la Mort - 1re partie;David Yates;6016779
-2.011 ;Intouchables;E.Toledano - O.Nakache;19440920
-2.012 ;Skyfall;Sam Mendes;7003902
-2.013 ;La Reine des neiges;C. Buck - J. Lee;5151855
-2.014 ;Qu'est-ce qu'on a fait au Bon Dieu ?;Philippe de Chauveron;12361430
-2.015 ;"Star Wars, épisode VII : Le Réveil de la Force";J. J. Abrams;10505479
-2.016 ;Vaiana : La Légende du bout du monde;J. Musker - R. Clements;5625807
-2.017 ;"Star Wars, épisode VIII : Les Derniers Jedi";Rian Johnson;7197448
-2.018 ;Les Indestructibles 2;Brad Bird;5845365
-2.019 ;Le Roi lion;Jon Favreau;10017995
-2.020 ;Tenet;Christopher Nolan;2348893
+annee,nom,realisateur,entrees
+1966,La Grande Vadrouille,GÃ©rard Oury,17272987
+1967,Les Grandes Vacances,Jean Girault,6986917
+1968,Le gendarme se marie,Jean Girault,6828626
+1969,Il Ã©tait une fois dans l'Ouest,Sergio Leone,14862831
+1970,Le Gendarme en balade,Jean Girault,4870673
+1971,Les Bidasses en folie,Claude Zidi,7460911
+1972,Orange mÃ©canique,Stanley Kubrick,6193896
+1973,Les Aventures de Rabbi Jacob,GÃ©rard Oury,7295811
+1974,Emmanuelle,Just Jaeckin,8894024
+1975,La Tour infernale,John Guillermin,4466376
+1976,Les Dents de la Mer,Steven Spielberg,6261062
+1977,Les Aventures de Bernard et Bianca,Wolfgang Reitherman,5219476
+1978,Midnight Express,Alan Parker,5973335
+1979,Le Gendarme et les Extra-terrestres,Jean Girault,6280070
+1980,La Boum,Claude Pinoteau,4378430
+1981,La ChÃ¨vre,Francis Veber,7079674
+1982,E.T. l'extra-terrestre,Steven Spielberg,7881332
+1983,Les dieux sont tombÃ©s sur la tÃªte,Jamie Uys,5950061
+1984,Marche Ã  l'ombre,Michel Blanc,6168425
+1985,Trois hommes et un couffin,Coline Serreau,10251465
+1986,Jean de Florette,Claude Berri,7223657
+1987,Crocodile Dundee,Peter Faiman,5887982
+1988,Le Grand Bleu,Luc Besson,9074317
+1989,Rain Man,Barry Levinson,6474520
+1990,Le Cercle des poÃ¨tes disparus,Peter Weir,6599969
+1991,Danse avec les loups,Kevin Costner,7280124
+1992,Basic Instinct,Paul Verhoeven,4615376
+1993,Les Visiteurs,Jean-Marie PoirÃ©,13782991
+1994,Le Roi Lion,R. Minkoff - R. Allers,10135871
+1995,Les Trois FrÃ¨res,B. Campan - D. Bourdon,6897098
+1996,Le Bossu de Notre-Dame,G. Trousdale - K. Wise,6833195
+1997,Le CinquiÃ¨me Ã‰lÃ©ment,Luc Besson,7727697
+1998,Titanic,James Cameron,20758841
+1999,AstÃ©rix et ObÃ©lix contre CÃ©sar,Claude Zidi,8948624
+2000,Taxi 2,GÃ©rard Krawczyk,10349454
+2001,Harry Potter Ã  l'Ã©cole des sorciers,Chris Columbus,9470090
+2002,AstÃ©rix et ObÃ©lixÂ : Mission ClÃ©opÃ¢tre,Alain Chabat,14559509
+2003,Le Monde de Nemo,A. Stanton - L. Unkrich,9528033
+2004,Les Choristes,Christophe Barratier,8696013
+2005,Harry Potter et la Coupe de Feu,Mike Newell,7732071
+2006,Les BronzÃ©s 3,Patrice Leconte,10355928
+2007,Ratatouille,Brad Bird,7845210
+2008,Bienvenue chez les Ch'tis,Dany Boon,20489303
+2009,Avatar,James Cameron,14677888
+2010,Harry Potter et les Reliques de la Mort - 1re partie,David Yates,6016779
+2011,Intouchables,E.Toledano - O.Nakache,19440920
+2012,Skyfall,Sam Mendes,7003902
+2013,La Reine des neiges,C. Buck - J. Lee,5151855
+2014,Qu'est-ce qu'on a fait au Bon DieuÂ ?,Philippe de Chauveron,12361430
+2015,Star Wars, Ã©pisode VIIÂ : Le RÃ©veil de la Force,J. J. Abrams,10505479
+2016,VaianaÂ : La LÃ©gende du bout du monde,J. Musker - R. Clements,5625807
+2017,Star Wars, Ã©pisode VIIIÂ : Les Derniers Jedi,Rian Johnson,7197448
+2018,Les Indestructibles 2,Brad Bird,5845365
+2019,Le Roi lion,Jon Favreau,10017995
+2020,Tenet,Christopher Nolan,2348893
