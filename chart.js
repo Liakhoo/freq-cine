@@ -90,13 +90,15 @@ async function chart(k = "freq", q = [],type = "T") {
   //Création du titre du graphique
   svg.append("text")
     .attr("class", "titlebis")
-    .style("font-size","20px")
+    .style("font-size","15px")
     .style("text-anchor", "middle")
     .attr("x", (width + margin.left + margin.right)/2)
     .attr("y", margin.top/2)
     .text(`${keyMap.get(k)} en fonction du temps`);
 
   //Création du titre des axes
+  var unit = unitMap.get(k) != "" ? `(en ${unitMap.get(k)})` : "";
+
   svg.append("text")
     .attr("class", "x label")
     .style("font-size","15px")
@@ -107,12 +109,12 @@ async function chart(k = "freq", q = [],type = "T") {
 
   svg.append("text")
     .attr("class", "y label")
-    .style("font-size","15px")
+    .style("font-size","10px")
     .attr("text-anchor", "middle")
     .attr("x", margin.top)
     .attr("y", margin.left-55)
     .attr("transform", `rotate(-90) translate(${-(height + margin.bottom + margin.top)/2 +10},10)`)
-    .text(`${keyMap.get(k)} ${unitMap.get(k)}`);
+    .text(`${keyMap.get(k)} ${unit}`);
 
 
   //Création des axes et affichage

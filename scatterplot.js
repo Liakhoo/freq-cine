@@ -121,6 +121,11 @@ async function scatterplot(var_x = "entrees", var_y = "freq", update=false) {
       .duration(1000)
       .text(`${date}`);
 
+    d3.select("#scatter").selectAll(".scatter_title")
+      .transition()
+      .duration(1000)
+      .text(`Indice de fréquentation en fonction ${getTitle(var_x)}`);
+
     //Points
     let circles = d3.select("#scatter").selectAll("circle").data(newdataset_P);
 
@@ -282,6 +287,7 @@ async function scatterplot(var_x = "entrees", var_y = "freq", update=false) {
   svg.append("text")
     .style("font-size","15px")
     .style("text-anchor", "middle")
+    .attr("class", "scatter_title")
     .attr("x", (width + margin.left + margin.right)/2)
     .attr("y", margin.top-15)
     .text(`Indice de fréquentation en fonction ${getTitle(var_x)} `);
