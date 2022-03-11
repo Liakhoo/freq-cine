@@ -46,7 +46,7 @@ Ci-dessous ce trouve le prototype papier auquel nous avons pensé (il est possib
 
 ## Contenu des fichiers
 
-Les données ont été réaorganisées et se trouvent dans les fichiers <tt>freq-cine.csv</tt> et <tt>top_film.csv</tt>.
+Les données ont été réorganisées et se trouvent dans les fichiers <tt>freq-cine.csv</tt> et <tt>top_film.csv</tt>.
 <br/>Le code HTML du site se trouve dans le fichier <tt>index.html</tt>.
 <br/>Le code CSS du site se trouve dans le fichier <tt>dataviz_freqcine_style.css</tt>.
 
