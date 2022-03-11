@@ -20,6 +20,8 @@ async function chart(k = "freq", q = [],type = "T") {
   let data = await getDataPromise();
   let data_film = await getDataPromise2();
 
+  let variable_node = document.getElementById('VarSelect');
+  let variable = variable_node.value;
     
   d3.schemePaired.push("#F236BB");
   const rawRegion = getValues(data, "region");
@@ -125,7 +127,7 @@ async function chart(k = "freq", q = [],type = "T") {
         else {
           //Ajout du tooltip
           tooltip.style("opacity",1)
-                .html("Année : " + d["year"].getFullYear() + "<br/>" + keyMap.get(k) + " : " + d[k] + unitMap.get(k))
+                .html("Année : " + d["year"].getFullYear() + "<br/>" + variable + " : " + d[k] + unitMap.get(k))
                 .style('visibility','visible').style("left", (d3.event.pageX-170) + "px").style("top", (d3.event.pageY) + "px");
         }
       })
