@@ -46,7 +46,7 @@ async function geo_map(w=300, h=300, g) {
     	.on("mouseover", function(d) {
       		// Création tooltip
           //tooltip.attr("transform", "translate("+ (mouse[0]-10) + "," + (mouse[1] - 10) + ")"); 
-      		tooltip.style('opacity', 1).text(d.properties.nom).style('visibility','visible').style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY) + "px");
+      		tooltip.style('opacity', 1).text(d.properties.nom).style('visibility','visible').style("left", (d3.event.pageX-65) + "px").style("top", (d3.event.pageY+20) + "px");
       		
       		// Gestion couleur
       		if (!isClicked){
@@ -59,6 +59,9 @@ async function geo_map(w=300, h=300, g) {
       			}
       		}
       	})
+      .on("mousemove", function(d) {
+        tooltip.style("left", (d3.event.pageX-65) + "px").style("top", (d3.event.pageY+20) + "px");
+      })
     	.on("click", (d,i) => {
         if(!chosen_region.includes(d.properties.nom)){
       		isClicked = true;
