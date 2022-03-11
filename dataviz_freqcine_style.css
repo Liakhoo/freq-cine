@@ -80,6 +80,7 @@ select:hover{
   text-anchor: middle;
   font-size: 90%;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .VarSelect_box{
@@ -206,15 +207,13 @@ input[type="checkbox"]:checked:after {
 }
 .tooltip{
   position: absolute;
-  text-align: center;
   font-size: 10px;
   background-color: #fff;
-  border: 1px solid #5b5b5b;
+  border: 1px solid #2b2b2b;
   border-radius: 8px;
-  color: #5b5b5b;
+  color: #2b2b2b;
   padding: 4px;
-  left: 75%;
-  top: 55%;
+  z-index: 9;
 }
 
 #td2{

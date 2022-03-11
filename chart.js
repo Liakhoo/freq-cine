@@ -4,12 +4,22 @@ async function chart(k = "freq", q = [],type = "T") {
   const height = 250;
   const width = 600;
 
+  //Création du tooltip
+  var tooltip = d3.select("#line_chart")
+      .append('div')
+      .attr('class','tooltip')
+      .style('opacity',0)
+      .style('text-align',"left")
+      .style("width","150px")
+
   //Création du svg
   const svg = d3.create("svg")
       .attr("viewBox", [0, 0, width, height])
 
   //Récupération des données à afficher
   let data = await getDataPromise();
+  let data_film = await getDataPromise2();
+
     
   d3.schemePaired.push("#F236BB");
   const rawRegion = getValues(data, "region");
@@ -85,6 +95,48 @@ async function chart(k = "freq", q = [],type = "T") {
     .attr("fill", "none")
     .attr("stroke-width", d => (isClicked && region == q[q.length-1]) ? "3" : "1")
     .attr("stroke", d => color(region))
+
+    svg.append("g").attr("transform", `translate(${margin.left}, 0)`).selectAll("circle")
+      .data(dataset)
+      .enter()
+      .append("circle")
+      .attr("type","scatter")
+      .attr("cx",(d,i) => x(d.year)-margin.left)
+      .attr("cy",d=> y(d[k]))
+      .attr("r",4)
+      .style("fill","#fff")
+      .style("opacity",0)
+      .style("stroke",d => color(region))
+      .on("mouseover", function(d,i) {
+        // affichage cercle
+        d3.select(this).style("opacity",1)
+
+        if (k=="entrees"){
+          //Récupération des données de film
+          nom = data_film[i].nom
+          annee = data_film[i].year.getFullYear()
+          real = data_film[i].real
+          entrees = data_film[i].entree
+
+          //Ajout du tooltip
+          tooltip.style("opacity",1)
+                .html("<strong>Film numéro 1 de l'année en France</strong>" + "<br/>" + "<br/>" + "Nom : " + nom + "<br/>" + "Réalisateur : " + real + "<br/>" + "Année : " + annee + "<br/>" + "Entrées : " + entrees + unitMap.get("entrees"))
+                .style('visibility','visible').style("left", (d3.event.pageX-170) + "px").style("top", (d3.event.pageY) + "px");
+        }
+        else {
+          //Ajout du tooltip
+          tooltip.style("opacity",1)
+                .html("Année : " + d["year"].getFullYear() + "<br/>" + keyMap.get(k) + " : " + d[k] + unitMap.get(k))
+                .style('visibility','visible').style("left", (d3.event.pageX-170) + "px").style("top", (d3.event.pageY) + "px");
+        }
+      })
+      .on("mouseleave", function(d) {
+        //Disparition du cercle
+        d3.select(this).style("opacity",0)
+
+        //Disparition du tooltip
+        tooltip.style('opacity', 0).style('visibility','hidden');
+      })
   }
 
   //Création du titre du graphique

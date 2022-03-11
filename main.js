@@ -1,6 +1,8 @@
 //importation des données
 let url = "https://raw.githubusercontent.com/Lyspa/freq-cine/main/freq-cine.csv";
+let url_film = "https://raw.githubusercontent.com/Lyspa/freq-cine/main/top_film.csv";
 let data = [];
+let data_film = [];
 let isClicked = false;
 var chosen_node = []; // définition de chosen_node pour éviter les erreurs d'exécution
 var chosen_region = []; // définition de chosen_region pour éviter les erreurs d'exécution
@@ -26,6 +28,18 @@ function getDataPromise() {
 	return dataPromise;
 }
 
+function getDataPromise2() {
+  let dataPromise = d3.csv(url_film,function(d) {
+    let res = {};
+      res.year = parseDate(d["annee"]);
+      res.nom = d["nom"];
+      res.real = d["realisateur"];
+      res.entree = Math.round(+d["entrees"]/10000)/100;
+      data_film.push(res);
+      return res;
+  });
+  return dataPromise;
+}
 
 let parseDate= d3.timeParse("%Y");
 
@@ -36,7 +50,13 @@ async function getPromiseValues(key) {
     let filteredData = filterTaille(data);
     let rawYear = getValues(filteredData, key);
     return rawYear;
+};
 
+async function getPromiseValues2(key) {
+    let data = await getDataPromise2();
+    let filteredData = filterTaille(data_film);
+    let rawYear = getValues(filteredData, key);
+    return rawYear;
 };
 
 let rawYear = getPromiseValues("year");
@@ -195,7 +215,6 @@ function getType(expr) {
 
 
 function mouseOverScatter(region) {
-  console.log(region);
   let nodes = document.querySelectorAll('*[type="scatter"]');
   for (let c of nodes){
         c.style.opacity = 0.15;

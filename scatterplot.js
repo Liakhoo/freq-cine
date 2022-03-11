@@ -66,6 +66,12 @@ async function scatterplot(var_x = "entrees", var_y = "freq", update=false) {
   //Calcul t max
   let global_tmax = calculateMax(dataset_P, dataset_M, dataset_G, "etab");
 
+  //Création du tooltip
+  var tooltip = d3.select("#scatter")
+      .append('div')
+      .attr('class','tooltip')
+      .style('opacity',0)
+      .style('text-align',"left")
 
   //Contenu de parseRegion
   let france = await getFrancePromise();
@@ -217,17 +223,22 @@ async function scatterplot(var_x = "entrees", var_y = "freq", update=false) {
     .attr("stroke", "black")
     .style("opacity",d => isClicked ? (chosen_region.includes(regionMap.get(d.region)) ? 1 : 0.15) : 1)
     .on("mouseover", function(d) {
+      //affichage du tooltip
+      tooltip.style('opacity', 1)
+            .html("Région : "+ regionMap.get(d.region) + "<br/>" + "Année : " + d["year"].getFullYear() + "<br/>" + "<br/>" + "Taille des établissements : " + getType("P") + "<br/>" + "Nombre d'établissements : " + d.etab + "<br/>" +"<br/>" + variable + " : " + d[var_x] + unitMap.get(var_x) + "<br/>" + "Indice de fréquentation : " + d[var_y])
+            .style('visibility','visible').style("left", (d3.event.pageX+20) + "px").style("top", (d3.event.pageY) + "px");
+
         if (!isClicked){
           mouseOverScatter(regionMap.get(d.region));
         }
       })
     .on("mouseleave", function(d) {
+      tooltip.style('opacity', 0).style('visibility','hidden');
         if (!isClicked){
           mouseLeaveScatter();
         }
       })
-    .append("title")
-    .text(d => "Région : "+ regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("P") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + unitMap.get(var_x) + "\nIndice de fréquentation : " + d[var_y])
+    .append("title") 
     
   
   //Carrés
@@ -244,17 +255,21 @@ async function scatterplot(var_x = "entrees", var_y = "freq", update=false) {
       .attr("stroke", "black")
       .style("opacity",d => isClicked ? (chosen_region.includes(regionMap.get(d.region)) ? 1 : 0.15) : 1)
       .on("mouseover", function(d) {
+        //affichage du tooltip
+        tooltip.style('opacity', 1)
+              .html("Région : " + regionMap.get(d.region) + "<br/>" + "Année : " + d["year"].getFullYear() + "<br/>" + "<br/>" + "Taille des établissements : " + getType("M") + "<br/>" + "Nombre d'établissements : " + d.etab + "<br/>" + "<br/>" + variable + " : " + d[var_x] + unitMap.get(var_x) + "<br/>" + "Indice de fréquentation : " + d[var_y])
+              .style('visibility','visible').style("left", (d3.event.pageX+20) + "px").style("top", (d3.event.pageY) + "px");
         if (!isClicked){
           mouseOverScatter(regionMap.get(d.region));
         }
       })
     .on("mouseleave", function(d) {
+      tooltip.style('opacity', 0).style('visibility','hidden');
         if (!isClicked){
           mouseLeaveScatter();
         }
       })
       .append("title")
-      .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("M") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + unitMap.get(var_x) + "\nIndice de fréquentation : " + d[var_y])
   
 
   //Triangles
@@ -270,17 +285,21 @@ async function scatterplot(var_x = "entrees", var_y = "freq", update=false) {
       .style("opacity",d => isClicked ? (chosen_region.includes(regionMap.get(d.region)) ? 1 : 0.15) : 1)
       //.attr("stroke", "black")
       .on("mouseover", function(d) {
+        //affichage du tooltip
+        tooltip.style('opacity',1)
+              .html("Région : " + regionMap.get(d.region) + "<br/>" + "Année : " + d["year"].getFullYear() + "<br/>" + "<br/>" + "Taille des établissements : " + getType("G") + "<br/>" + "Nombre d'établissements : " + d.etab + "<br/>" + "<br/>" + variable + " : " + d[var_x] + unitMap.get(var_x) + "<br/>" + "Indice de fréquentation : " + d[var_y])
+              .style('visibility','visible').style("left", (d3.event.pageX+20) + "px").style("top", (d3.event.pageY) + "px");
         if (!isClicked){
           mouseOverScatter(regionMap.get(d.region));
         }
       })
     .on("mouseleave", function(d) {
+      tooltip.style('opacity',0).style('visibility','hidden')
         if (!isClicked){
           mouseLeaveScatter();
         }
       })
       .append("title")
-      .text(d => "Région : " + regionMap.get(d.region) + "\nAnnée : " + d["year"].getFullYear() + "\n\nTaille des établissements : " + getType("G") + "\nNombre d'établissements : " + d.etab + "\n\n" + variable + " : " + d[var_x] + unitMap.get(var_x) + "\nIndice de fréquentation : " + d[var_y])
   
 
   //Création du titre du graphique

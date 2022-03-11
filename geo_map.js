@@ -29,6 +29,8 @@ async function geo_map(w=300, h=300, g) {
     	.append('div')
       .attr('class','tooltip')
       .style('opacity',0)
+      .style('width',"130px")
+      .style('text-align',"center")
   	
     //Carte de la France
   	svg.append("g").selectAll("path")
@@ -42,10 +44,9 @@ async function geo_map(w=300, h=300, g) {
     	.attr('class', d => d.properties.nom.split(' ').join('-').split("'").join('')) //ajuster nom pour enlever espace et apostrophe qui empêche bon fonctionnement du code
     	.attr('type','region')
     	.on("mouseover", function(d) {
-          var mouse = d3.mouse(this);
       		// Création tooltip
           //tooltip.attr("transform", "translate("+ (mouse[0]-10) + "," + (mouse[1] - 10) + ")"); 
-      		tooltip.style('opacity', 1).text(d.properties.nom).style('visibility','visible');
+      		tooltip.style('opacity', 1).text(d.properties.nom).style('visibility','visible').style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY) + "px");
       		
       		// Gestion couleur
       		if (!isClicked){
