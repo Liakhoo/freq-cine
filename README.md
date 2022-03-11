@@ -25,6 +25,8 @@ Les relevés généraux pour une région sont accessibles depuis 1992 pour le no
 
 Le fichier de données initial est disponible [ici](https://www.cnc.fr/professionnels/etudes-et-rapports/statistiques/statistiques-par-secteur) et s'intitule "Données par région". Ce fichier Excel a été retravaillé avec Python afin de pouvoir extraire, pour chaque région, les données correspondant au type "petit", "moyen", "grand" et "total" et de les stocker dans un fichier csv pouvant être facilement exploité.
 
+Nous avons également récupéré sur Wikipedia la liste des films ayant réalisé le plus d'entrées en France pour chaque année entre 1966 et 2020. Nous avons pour chaque film récupéré son titre, le nom de son réalisateur et le nombre d'entrées qu'il a réalisé.
+
 
 ## Présentation de la visualisation
 
@@ -44,7 +46,7 @@ Ci-dessous ce trouve le prototype papier auquel nous avons pensé (il est possib
 
 ## Contenu des fichiers
 
-Les données ont été réaorganisées et se trouvent dans le fichier <tt>freq-cine.csv</tt>.
+Les données ont été réaorganisées et se trouvent dans les fichiers <tt>freq-cine.csv</tt> et <tt>top_film.csv</tt>.
 <br/>Le code HTML du site se trouve dans le fichier <tt>index.html</tt>.
 <br/>Le code CSS du site se trouve dans le fichier <tt>dataviz_freqcine_style.css</tt>.
 
