@@ -69,6 +69,7 @@ async function scatterplot(var_x = "entrees", var_y = "freq", update=false) {
   //Création du tooltip
   var tooltip = d3.select("#scatter")
       .append('div')
+      .attr('id','tooltip_scatter')
       .attr('class','tooltip')
       .style('opacity',0)
       .style('text-align',"left")
@@ -132,6 +133,7 @@ async function scatterplot(var_x = "entrees", var_y = "freq", update=false) {
       .duration(1000)
       .text(`Indice de fréquentation en fonction ${getTitle(var_x)}`);
 
+
     //Points
     let circles = d3.select("#scatter").selectAll("circle").data(newdataset_P);
 
@@ -144,6 +146,27 @@ async function scatterplot(var_x = "entrees", var_y = "freq", update=false) {
     .attr("cy", d => y(d[var_y]))
     .attr("r", d => taille(d["etab"]))
     .attr("display", d => document.querySelector('#petit').checked ? "inherit" : "none")
+
+    //Update tooltip
+    circles.enter()
+    .append("circle")
+    .merge(circles)
+    .on("mouseover", function(d) {
+      //affichage du tooltip
+      tooltip.style('opacity', 1)
+            .html("Région : "+ regionMap.get(d.region) + "<br/>" + "Année : " + d["year"].getFullYear() + "<br/>" + "<br/>" + "Taille des établissements : " + getType("P") + "<br/>" + "Nombre d'établissements : " + d.etab + "<br/>" +"<br/>" + variable + " : " + d[var_x] + unitMap.get(var_x) + "<br/>" + "Indice de fréquentation : " + d[var_y])
+            .style('visibility','visible').style("left", (d3.event.pageX+20) + "px").style("top", (d3.event.pageY) + "px");
+
+        if (!isClicked){
+          mouseOverScatter(regionMap.get(d.region));
+        }
+      })
+    .on("mouseleave", function(d) {
+      tooltip.style('opacity', 0).style('visibility','hidden');
+        if (!isClicked){
+          mouseLeaveScatter();
+        }
+      })
     
 
     //Carrés
@@ -159,6 +182,27 @@ async function scatterplot(var_x = "entrees", var_y = "freq", update=false) {
     .attr("height", d => 2*taille(d["etab"]))
     .attr("width", d => 2*taille(d["etab"]))
     .attr("display", d => document.querySelector('#moyen').checked ? "inherit" : "none")
+
+    //Update tooltip
+    rects.enter()
+    .append("rect")
+    .merge(rects)
+    .on("mouseover", function(d) {
+      //affichage du tooltip
+      tooltip.style('opacity', 1)
+            .html("Région : "+ regionMap.get(d.region) + "<br/>" + "Année : " + d["year"].getFullYear() + "<br/>" + "<br/>" + "Taille des établissements : " + getType("M") + "<br/>" + "Nombre d'établissements : " + d.etab + "<br/>" +"<br/>" + variable + " : " + d[var_x] + unitMap.get(var_x) + "<br/>" + "Indice de fréquentation : " + d[var_y])
+            .style('visibility','visible').style("left", (d3.event.pageX+20) + "px").style("top", (d3.event.pageY) + "px");
+
+        if (!isClicked){
+          mouseOverScatter(regionMap.get(d.region));
+        }
+      })
+    .on("mouseleave", function(d) {
+      tooltip.style('opacity', 0).style('visibility','hidden');
+        if (!isClicked){
+          mouseLeaveScatter();
+        }
+      })
     
 
     //Triangles
@@ -173,6 +217,27 @@ async function scatterplot(var_x = "entrees", var_y = "freq", update=false) {
             return String(x(d[var_x]) - taille(d["etab"])) + "," + String(y(d[var_y]) + taille(d["etab"])) + " " + String(x(d[var_x])) + "," + String(y(d[var_y]) - taille(d["etab"])) + " " + String(x(d[var_x]) + taille(d["etab"])) + "," + String(y(d[var_y]) + taille(d["etab"]));
     })
     .attr("display", d => document.querySelector('#grand').checked ? "inherit" : "none")
+
+    //Update tooltip
+    poly.enter()
+    .append("polygon")
+    .merge(poly)
+    .on("mouseover", function(d) {
+      //affichage du tooltip
+      tooltip.style('opacity', 1)
+            .html("Région : "+ regionMap.get(d.region) + "<br/>" + "Année : " + d["year"].getFullYear() + "<br/>" + "<br/>" + "Taille des établissements : " + getType("G") + "<br/>" + "Nombre d'établissements : " + d.etab + "<br/>" +"<br/>" + variable + " : " + d[var_x] + unitMap.get(var_x) + "<br/>" + "Indice de fréquentation : " + d[var_y])
+            .style('visibility','visible').style("left", (d3.event.pageX+20) + "px").style("top", (d3.event.pageY) + "px");
+
+        if (!isClicked){
+          mouseOverScatter(regionMap.get(d.region));
+        }
+      })
+    .on("mouseleave", function(d) {
+      tooltip.style('opacity', 0).style('visibility','hidden');
+        if (!isClicked){
+          mouseLeaveScatter();
+        }
+      })
 
     return 0;
   }
