@@ -60,11 +60,10 @@ Enfin, le dossier "images" contient les différentes images que nous avons utili
 
 ## Première interprétations
 
-Tout d'abord, nous pouvons remarquer que toutes les régions ont des tendances similaires. En considérant par exemple le nombre d'entrées, nous pouvons observer pour toutes les régions une diminution du nombre d'entrée dans les années 80 avant une augmentation dans les 90, cette dernière étant due à l'apparition des multiplexes dans les cinémas des villes moins importantes. De temps en temps, nous pouvons remarquer quelques divergences, comme le nombre d'entrées pour la Corse qui fait un pic en 1980 (sûrement à cause de la sortie d'un film corse au cinéma cette année-là), mais ces dernières sont rares.
+Tout d'abord, nous pouvons remarquer que toutes les régions ont des tendances similaires. En considérant par exemple le nombre d'entrées, nous pouvons observer pour toutes les régions une diminution du nombre d'entrées dans les années 80 avant une augmentation dans les années 90, cette dernière étant due à l'apparition des multiplexes dans les cinémas des villes moins importantes. De temps en temps, nous pouvons remarquer quelques divergences, comme le nombre d'entrées pour la Corse qui fait un pic en 1980 (sûrement à cause de la sortie d'un film corse au cinéma cette année-là), mais ces dernières sont rares.
 
 L'impact de la Covid-19 est bien sûr visible pour l'année 2020, avec une chute drastique pour la plupart des indicateurs (nombre d'entrées, nombre de séances, recettes...).
 
 Nous pouvons également identifier l'augmentation du prix des places de cinémas et du nombre de cinémas. En effet, même si nous remarquons depuis les années 2000 un nombre d'entrées plutôt stable (exception faite de l'année 2020), les recettes ne cessent d'augmenter, ce qui prouve que le prix d'une entrée a augmenté.
 
-Enfin, une dernière observation concerne les établissements présents dans chaque région. Il y a très souvent un nombre important de cinémas réalisant peu d'entrées, et peu de gros cinémas réalisant beaucoup d'entrées. Néanmoins, la région Île-de-France est une exception : elle contient un nombre de grands établissements non néagligeables.
-
+Enfin, une dernière observation intéressante concerne les établissements présents dans chaque région. Il y a très souvent un nombre important de cinémas réalisant peu d'entrées, et peu de gros cinémas réalisant beaucoup d'entrées. Néanmoins, la région Île-de-France est une exception : elle contient un nombre de grands établissements non néagligeables.
