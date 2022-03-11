@@ -100,7 +100,6 @@ async function chart(k = "freq", q = [],type = "T") {
       .data(dataset)
       .enter()
       .append("circle")
-      .attr("type","scatter")
       .attr("cx",(d,i) => x(d.year)-margin.left)
       .attr("cy",d=> y(d[k]))
       .attr("r",4)
